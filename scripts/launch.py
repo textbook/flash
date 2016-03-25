@@ -1,6 +1,8 @@
 import logging
 import sys
 
+from os import getenv
+
 from flash import app
 
 logging.basicConfig(
@@ -11,4 +13,4 @@ logging.basicConfig(
 )
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=int(getenv('PORT', 5000)), debug=False)
