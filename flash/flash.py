@@ -1,6 +1,6 @@
 """The main Flask application."""
 import json
-from os import path
+from os import getenv, path
 
 from flask import Flask, jsonify, render_template, request
 
@@ -10,12 +10,34 @@ app = Flask(__name__)
 
 
 def parse_config():
-    """Parse the configuration file and create required services."""
-    file_name = path.join(
-        path.abspath(path.dirname(__file__)), 'config.json'
-    )
-    with open(file_name) as config_file:
-        data = json.load(config_file)
+    """Parse the configuration and create required services.
+
+    Note:
+      Either takes the configuration from the environment (a variable
+      named ``FLASH_CONFIG``) or a file at the module root (named
+      ``config.json``). Either way, it will attempt to parse it as
+      JSON, expecting the following format::
+
+          {
+            "name": <Project Name>,
+            "services": [
+              {
+                "name": <Service Name>,
+                <Service Settings>
+              }
+            ]
+          }
+
+    """
+    env = getenv('FLASH_CONFIG')
+    if env:
+        data = json.loads(env)
+    else:
+        file_name = path.join(
+            path.abspath(path.dirname(__file__)), 'config.json'
+        )
+        with open(file_name) as config_file:
+            data = json.load(config_file)
     data['services'] = define_services(data['services'])
     return data
 
@@ -31,15 +53,7 @@ def home():
 
 @app.route('/_services')
 def services():
-    """AJAX route for accessing services.
-
-    Arguments:
-      name (:py:class:`str`): The name of the service to update.
-
-    Returns:
-      The returned data from the service's update method, as JSON.
-
-    """
+    """AJAX route for accessing services."""
     name = request.args.get('name', '', type=str)
     if name:
         for service in CONFIG.get('services', []):

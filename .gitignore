@@ -105,6 +105,3 @@ docs/_build/
 
 # PyBuilder
 target/
-
-# Local configuration
-config.json
