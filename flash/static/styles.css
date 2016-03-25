@@ -1,0 +1,40 @@
+body {
+  background-color: #424242;
+  color: #ffffff;
+  font-family: 'Proxima Nova', sans-serif;
+  overflow: hidden;
+}
+
+main {
+  font-size: larger;
+  padding: 15px;
+  width: 100%;
+}
+
+footer {
+  background-color: #00776d;
+  bottom: 0;
+  left: -5px;
+  padding: 10px;
+  position: absolute;
+  text-align: center;
+  width: 100%
+}
+
+.headline {
+  text-align: center;
+}
+
+.pane {
+  display: flex;
+  width: 100%
+}
+
+.pane-item {
+  margin: 10px;
+  width: 20%;
+}
+
+.pane-item > .item-title {
+  font-weight: bold;
+}

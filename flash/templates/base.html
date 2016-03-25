@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flash - Flask Dashboard</title>
+  <script
+      src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script>
+    $SERVICES = {{ url_for('services') | tojson | safe }}
+        window.jQuery || document.write('<script src="{{
+            url_for('static', filename='jquery-2.2.2.min.js')
+        }}">\x3C/script>')
+  </script>
+  <script src="{{ url_for('static', filename='services.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+{% block body %}{% endblock %}
+<footer>Last update: <span class="last-update">Not yet updated</span></footer>
+</body>
+</html>

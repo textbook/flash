@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block body %}<main>
+  <h1 class="headline">{{ config.project_name }}</h1>
+  <div class="dashboard">
+    {% for service in config.services %}
+      {% set template = 'partials/{}.html'.format(service.TEMPLATE) %}
+      {% include template %}
+    {% endfor %}
+  </div>
+</main>{% endblock %}
