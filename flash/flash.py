@@ -4,7 +4,7 @@ from os import path
 
 from flask import Flask, jsonify, render_template, request
 
-from flash.services import SERVICES
+from flash.services import define_services
 
 app = Flask(__name__)
 
@@ -16,10 +16,7 @@ def parse_config():
     )
     with open(file_name) as config_file:
         data = json.load(config_file)
-    for index, config in enumerate(data['services']):
-        if config['name'] not in SERVICES:
-            raise ValueError('unknown service {!r}'.format(config['name']))
-        data['services'][index] = SERVICES[config['name']](**config)
+    data['services'] = define_services(data['services'])
     return data
 
 
