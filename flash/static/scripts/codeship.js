@@ -12,10 +12,7 @@ function codeshipUpdate () {
           $('.codeship-pane #outcome-' + index).text(build.status)
         }
       }
-      var date = new Date();
-      $('.last-update').text(
-        date.toDateString() + ' ' + date.toLocaleTimeString()
-      )
+      lastUpdate('.codeship-pane');
     }
   });
 }

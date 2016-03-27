@@ -4,10 +4,7 @@ function trackerUpdate () {
       console.debug('received data', data);
       if (data.name) { $('.tracker-pane .project-name').text(data.name); }
       if (data.velocity){ $('.tracker-pane .velocity').text(data.velocity); }
-      var date = new Date();
-      $('.last-update').text(
-        date.toDateString() + ' ' + date.toLocaleTimeString()
-      )
+      lastUpdate('.tracker-pane');
     }
   });
 }
