@@ -1,7 +1,6 @@
 import logging
-import sys
-
 from os import getenv
+import sys
 
 from flash import app
 
