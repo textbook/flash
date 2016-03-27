@@ -1,13 +1,17 @@
 """The main Flask application."""
 import json
+import logging
 from os import getenv, path
 
 from flask import Flask, jsonify, render_template, request
 
 from flash.services import define_services
 
+logger = logging.getLogger(__name__)
+
 app = Flask(__name__)
 app.secret_key = getenv('FLASK_SECRET_KEY', 'youwillneverguessit')
+
 
 def parse_config():
     """Parse the configuration and create required services.
@@ -31,8 +35,10 @@ def parse_config():
     """
     env = getenv('FLASH_CONFIG')
     if env:
+        logger.info('loading configuration from environment')
         data = json.loads(env)
     else:
+        logger.info('loading configuration from file')
         file_name = path.join(
             path.abspath(path.dirname(__file__)), 'config.json'
         )
