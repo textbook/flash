@@ -1,12 +1,14 @@
-<section class="pane tracker-pane">
-  <div class="pane-item">
-    <span class="pane-title service-name">Pivotal Tracker</span>
-    <span class="project-name"></span>
-    <span class="last-update"></span>
+<div id="tracker-service" class="service-tile">
+  <div class="service-caption">
+    <div class="service-name">Pivotal Tracker</div>
+    <div class="last-update"></div>
+    <div class="project-name"></div>
   </div>
-  <div class="pane-item">
-    <span class="item-title">Current velocity: </span>
-    <span class="velocity"></span>
-  </div>
-</section>
-<script src="{{ url_for('static', filename='scripts/tracker.js') }}"></script>
+  <section class="pane tracker-pane">
+    <div class="pane-item">
+      <span class="item-title">Current velocity: </span>
+      <span class="velocity"></span>
+    </div>
+  </section>
+  <script src="{{ url_for('static', filename='scripts/tracker.js') }}"></script>
+</div>
