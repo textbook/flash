@@ -61,8 +61,6 @@ def home():
 def services():
     """AJAX route for accessing services."""
     name = request.args.get('name', '', type=str)
-    if name:
-        for service in CONFIG.get('services', []):
-            if service.__class__.__name__.lower() == name.lower():
-                return jsonify(service.update() or {})
+    if name in CONFIG['services']:
+        return jsonify(CONFIG['services'].update() or {})
     return jsonify({})

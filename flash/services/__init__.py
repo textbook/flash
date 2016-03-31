@@ -1,5 +1,7 @@
 """Defines the services that can be shown on the dashboard."""
 
+from collections import OrderedDict
+
 from .codeship import Codeship
 from .tracker import Tracker
 
@@ -17,15 +19,18 @@ def define_services(config):
       config (:py:class:`list`): The service configuration required.
 
     Returns:
-      :py:class:`list`: Configured services.
+      :py:class:`collections.OrderedDict`: Configured services.
 
     Raises:
       :py:class:`ValueError`: If a non-existent service is requested.
 
     """
-    services = []
+    services = OrderedDict()
     for settings in config:
-        if settings['name'] not in SERVICES:
-            raise ValueError('unknown service {!r}'.format(settings['name']))
-        services.append(SERVICES[settings['name']](**settings))
+        name = settings['name']
+        if name not in SERVICES:
+            raise ValueError('unknown service {!r}'.format(name))
+        if name in services:
+            raise ValueError('duplicate service {!r}'.format(name))
+        services[name] = SERVICES[name](**settings)
     return services
