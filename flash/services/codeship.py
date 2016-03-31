@@ -3,12 +3,13 @@ import logging
 
 import requests
 
-from flash.services.core import Service
+from .auth import UrlParamMixin
+from .core import Service
 
 logger = logging.getLogger(__name__)
 
 
-class Codeship(Service):
+class Codeship(UrlParamMixin, Service):
 
     REQUIRED = {'api_token', 'project_id'}
     ROOT = 'https://codeship.com/api/v1'
@@ -18,12 +19,6 @@ class Codeship(Service):
         super().__init__()
         self.api_token = api_token
         self.project_id = project_id
-
-    def _url_builder(self, endpoint, params=None, url_params=None):
-        if url_params is None:
-            url_params = {}
-        url_params['api_key'] = self.api_token
-        return super()._url_builder(endpoint, params, url_params)
 
     def update(self):
         logger.debug('fetching Codeship project data')

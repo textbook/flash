@@ -2,12 +2,13 @@
 import logging
 import requests
 
+from .auth import HeaderMixin
 from .core import Service
 
 logger = logging.getLogger(__name__)
 
 
-class Tracker(Service):
+class Tracker(HeaderMixin, Service):
     """Show the current status of a Pivotal Tracker project.
 
     Arguments:
@@ -20,6 +21,7 @@ class Tracker(Service):
 
     """
 
+    AUTH_HEADER = 'X-TrackerToken'
     REQUIRED = {'api_token', 'project_id'}
     ROOT = 'https://www.pivotaltracker.com/services/v5'
     TEMPLATE = 'tracker'
@@ -30,10 +32,6 @@ class Tracker(Service):
         self.project_id = project_id
         self.project_version = 0
         self._cached = dict(name='unknown', velocity='unknown')
-
-    @property
-    def headers(self):
-        return {'X-TrackerToken': self.api_token}
 
     def _get_velocity(self, data):
         """Update the project data with the current velocity.

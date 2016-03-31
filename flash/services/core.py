@@ -24,6 +24,10 @@ class Service(metaclass=ABCMeta):
         """Get the current state to display on the dashboard."""
         pass
 
+    @property
+    def headers(self):
+        return {}
+
     def _url_builder(self, endpoint, params=None, url_params=None):
         """Create a URL for the specified endpoint.
 
