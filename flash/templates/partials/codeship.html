@@ -1,11 +1,15 @@
-<section class="pane codeship-pane">
-  <div class="pane-item">
-    <span class="pane-title service-name">Codeship</span>
-    <span class="project-name"></span>
-    <span class="last-update"></span>
+<div id="codeship-service" class="service-tile">
+  <div class="service-caption">
+    <div class="service-name">
+      Codeship CI
+    </div>
+    <div class="last-update"></div>
+    <div class="project-name"></div>
   </div>
-  {% for _ in range(4) %}
-    {% include 'partials/outcome.html' %}
-  {% endfor %}
-</section>
-<script src="{{ url_for('static', filename='scripts/codeship.js') }}"></script>
+  <section class="pane codeship-pane">
+    {% for _ in range(4) %}
+      {% include 'partials/outcome.html' %}
+    {% endfor %}
+  </section>
+  <script src="{{ url_for('static', filename='scripts/codeship.js') }}"></script>
+</div>
