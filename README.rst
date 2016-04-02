@@ -1,6 +1,22 @@
 Flash
 =====
 
+.. image:: https://travis-ci.org/textbook/flash.svg?branch=master
+  :target: https://travis-ci.org/textbook/flash
+  :alt: Travis Build Status
+
+.. image:: https://coveralls.io/repos/github/textbook/flash/badge.svg?branch=master
+  :target: https://coveralls.io/github/textbook/flash?branch=master
+  :alt: Test Coverage
+
+.. image:: https://www.quantifiedcode.com/api/v1/project/3b65c038488c41d3a1a12f3bc9bb1bd8/badge.svg
+  :target: https://www.quantifiedcode.com/app/project/3b65c038488c41d3a1a12f3bc9bb1bd8
+  :alt: Code Issues
+
+.. image:: https://img.shields.io/badge/license-ISC-blue.svg
+  :target: https://github.com/textbook/halliwell/blob/master/LICENSE
+  :alt: ISC License
+
 Flask project dashboards.
 
 Configuration
