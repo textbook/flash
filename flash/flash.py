@@ -64,7 +64,7 @@ def services():
     if name in CONFIG['services']:
         data = CONFIG['services'][name].update()
         if not data:
-            logger.warn('no data received for service: %s', name)
+            logger.warning('no data received for service: %s', name)
         return jsonify(data or {})
-    logger.warn('service not found: %s', name)
+    logger.warning('service not found: %s', name)
     return jsonify({})
