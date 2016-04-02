@@ -26,9 +26,8 @@ class Tracker(HeaderMixin, Service):
     ROOT = 'https://www.pivotaltracker.com/services/v5'
     TEMPLATE = 'tracker'
 
-    def __init__(self, *, api_token, project_id, **_):
-        super().__init__()
-        self.api_token = api_token
+    def __init__(self, *, api_token, project_id, **kwargs):
+        super().__init__(api_token=api_token, **kwargs)
         self.project_id = project_id
         self.project_version = 0
         self._cached = dict(name='unknown', velocity='unknown')

@@ -16,7 +16,7 @@ class Service(metaclass=ABCMeta):
     """:py:class:`str`: The name of the template to render."""
 
     @abstractmethod
-    def __init__(self):
+    def __init__(self, *_, **__):
         pass
 
     @abstractmethod
@@ -26,6 +26,7 @@ class Service(metaclass=ABCMeta):
 
     @property
     def headers(self):
+        """Get the headers for the service requests."""
         return {}
 
     def _url_builder(self, endpoint, params=None, url_params=None):
@@ -50,8 +51,8 @@ class Service(metaclass=ABCMeta):
         return ''.join([
             self.ROOT,
             endpoint,
-            '?' + formatted_params if formatted_params else ''],
-        ).format(**params or {})
+            '?' + formatted_params if formatted_params else ''
+        ]).format(**params or {})
 
     @classmethod
     def from_config(cls, **config):

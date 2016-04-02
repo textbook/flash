@@ -23,7 +23,7 @@ def test_parse_config_from_env(logger, getenv, define_services):
 @mock.patch('flash.flash.define_services')
 @mock.patch('flash.flash.getenv', return_value=None)
 @mock.patch('flash.flash.logger')
-def test_parse_config_from_env(logger, getenv, define_services):
+def test_parse_config_from_file(logger, getenv, define_services):
     result = parse_config()
 
     assert result == {'name': 'foo', 'services': define_services.return_value}
