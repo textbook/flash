@@ -1,10 +1,12 @@
 """Defines the Codeship CI service integration."""
 import logging
 
+from dateutil.parser import parse
 import requests
 
 from .auth import UrlParamMixin
 from .core import Service
+from .utils import elapsed_time, truncate
 
 logger = logging.getLogger(__name__)
 
@@ -67,10 +69,16 @@ class Codeship(UrlParamMixin, Service):
           :py:class:`dict`: The re-formatted data.
 
         """
+        try:
+            elapsed = elapsed_time(
+                parse(build.get('started_at')),
+                parse(build.get('finished_at')),
+            )
+        except (AttributeError, ValueError):
+            elapsed = 'Elapsed time not available'
         return dict(
             author=build.get('github_username'),
-            end=build.get('finished_at'),
-            message=build.get('message'),
+            elapsed=elapsed,
+            message=truncate(build.get('message')),
             outcome=build.get('status'),
-            start=build.get('started_at'),
         )

@@ -2,6 +2,8 @@ astroid==1.4.4
 colorama==0.3.7
 cookies==2.2.1
 Flask==0.10.1
+Flask-Humanize==0.3.0
+humanize==0.5.1
 itsdangerous==0.24
 Jinja2==2.8
 lazy-object-proxy==1.2.1
@@ -14,6 +16,7 @@ pytest-html==1.8.0
 pytest-pylint==0.4.1
 pytest-selenium==1.2.1
 pytest-variables==1.4
+python-dateutil==2.5.2
 requests==2.9.1
 responses==0.5.1
 selenium==2.53.1
