@@ -60,7 +60,11 @@ def home():
 @app.route('/_services')
 def services():
     """AJAX route for accessing services."""
-    name = request.args.get('name', '', type=str)
+    name = request.args.get('name', '', type=str).lower()
     if name in CONFIG['services']:
-        return jsonify(CONFIG['services'].update() or {})
+        data = CONFIG['services'][name].update()
+        if not data:
+            logger.warn('no data received for service: %s', name)
+        return jsonify(data or {})
+    logger.warn('service not found: %s', name)
     return jsonify({})
