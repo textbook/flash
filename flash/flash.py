@@ -61,10 +61,27 @@ def home():
 def services():
     """AJAX route for accessing services."""
     name = request.args.get('name', '', type=str).lower()
-    if name in CONFIG['services']:
-        data = CONFIG['services'][name].update()
+    return jsonify(update_service(name, CONFIG['services']))
+
+
+def update_service(name, service_map):
+    """Get an update from the specified service.
+
+    Arguments:
+      name (:py:class:`str`): The name of the service.
+      service_map (:py:class:`dict`): A mapping of service names to
+        :py:class:`flash.service.core.Service` instances.
+
+    Returns:
+      :py:class:`dict`: The updated data.
+
+    """
+    if name in service_map:
+        data = service_map[name].update()
         if not data:
+            data = {}
             logger.warning('no data received for service: %s', name)
-        return jsonify(data or {})
-    logger.warning('service not found: %s', name)
-    return jsonify({})
+    else:
+        logger.warning('service not found: %s', name)
+        data = {}
+    return data
