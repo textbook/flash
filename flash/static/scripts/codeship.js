@@ -14,14 +14,14 @@ function codeshipUpdate () {
       var pane = $('section.codeship-pane');
       console.debug('received data', data);
       if (data.repository_name) {
-        pane.children('.pane-item').children('.project-name').text(
+        $('#codeship-service').children('.service-caption').children('.project-name').text(
           data.repository_name
         );
       }
       if (data.builds) {
         updateOutcomes(pane, data.builds, codeshipBuildData);
       }
-      lastUpdate('.codeship-pane');
+      lastUpdate('#codeship-service');
     }
   });
 }

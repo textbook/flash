@@ -1,49 +1,79 @@
 body {
-  background-color: #424242;
-  color: #ffffff;
-  font-family: 'Proxima Nova', sans-serif;
-  overflow: hidden;
+  background-color: #1D1D1D;
+  color: #dddddd;
+  font-family: Helvetica Neue, sans-serif;
+  margin: 5%;
 }
 
-main {
-  font-size: larger;
-  padding: 15px;
-  width: 100%;
+h1 {
+  font-size: 4rem;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.service-tile {
+  margin: 40px 0;
+}
+
+.service-name {
+  font-size: 2rem;
+}
+
+.pane {
+  display: flex;
+}
+
+.service-caption {
+  margin: 0 0 20px 10px;
+  text-align: center;
+}
+
+.pane-item {
+  background: gray;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.pane-item .message {
+  font-size: 1.45rem;
 }
 
 footer {
-  background-color: #00776d;
+  background-color: #2F2F2F;
   bottom: 0;
-  left: -5px;
+  left: 0;
   padding: 10px;
   position: absolute;
   text-align: center;
   width: 100%
 }
 
-.headline {
-  text-align: center;
-}
-
-.pane {
-  display: flex;
-  width: 100%
-}
-
-.pane-item {
-  margin: 10px;
-  padding: 10px;
-  width: 20%;
-}
-
-.item-title, .pane-title {
-  font-weight: bold;
+.last-update, .project-name {
+  color: rgb(128, 128, 128)
 }
 
 .build-outcome.success {
-  background-color: green;
+  background-color: #076707;
+}
+
+.build-outcome:first-child.success {
+  -webkit-animation: success-animation 3s infinite;
+}
+
+@-webkit-keyframes success-animation {
+  50%  {background: #088C08;}
 }
 
 .build-outcome.error {
-  background-color: red;
+  background-color: #840B0B;
+}
+
+.build-outcome:first-child.error {
+  -webkit-animation: error-animation 3s infinite;
+}
+
+@-webkit-keyframes error-animation {
+  50%  {background: #BF0E0E;}
 }

@@ -2,9 +2,9 @@ function trackerUpdate () {
   $.getJSON($SERVICES, {name: 'tracker'}, function (data) {
     if (data) {
       console.debug('received data', data);
-      if (data.name) { $('.tracker-pane .project-name').text(data.name); }
+      if (data.name) { $('#tracker-service .project-name').text(data.name); }
       if (data.velocity){ $('.tracker-pane .velocity').text(data.velocity); }
-      lastUpdate('.tracker-pane');
+      lastUpdate('#tracker-service');
     }
   });
 }
