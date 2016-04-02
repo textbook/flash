@@ -33,7 +33,44 @@ class Codeship(UrlParamMixin, Service):
             self._url_builder('/projects/{id}.json', {'id': self.project_id})
         )
         if response.status_code == 200:
-            return response.json()
+            return self.format_data(response.json())
         else:
             logger.error('failed to update Codeship project data')
         return {}
+
+    @classmethod
+    def format_data(cls, data):
+        """Re-format the response data for the front-end.
+
+        Arguments:
+          data (:py:class:`dict`): The JSON data from the response.
+
+        Returns:
+          :py:class:`dict`: The re-formatted data.
+
+        """
+        return dict(
+            builds=[
+                cls.format_build(build) for build in data.get('builds', [])
+            ],
+            name=data.get('repository_name'),
+        )
+
+    @staticmethod
+    def format_build(build):
+        """Re-format the build data for the front-end.
+
+        Arguments:
+          build (:py:class:`dict`): The JSON data from the response.
+
+        Returns:
+          :py:class:`dict`: The re-formatted data.
+
+        """
+        return dict(
+            author=build.get('github_username'),
+            end=build.get('finished_at'),
+            message=build.get('message'),
+            outcome=build.get('status'),
+            start=build.get('started_at'),
+        )

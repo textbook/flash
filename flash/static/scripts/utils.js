@@ -40,9 +40,9 @@ function updateOutcome (element, data) {
   });
 }
 
-function updateOutcomes(pane, builds, converter) {
+function updateOutcomes(pane, builds) {
   var outcomes = pane.children('.build-outcome');
   builds.slice(0, 4).forEach(function (build, index) {
-    updateOutcome(outcomes.eq(index), converter(build));
+    updateOutcome(outcomes.eq(index), build);
   });
 }
