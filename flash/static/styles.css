@@ -54,8 +54,12 @@ footer {
   color: rgb(128, 128, 128)
 }
 
+.pane-item.commit {
+  background-color: #470b84;
+}
+
 .build-outcome.passed {
-  background-color: #076707;
+  background-color: #0B840B;
 }
 
 .build-outcome:first-child.passed {
@@ -63,7 +67,7 @@ footer {
 }
 
 @-webkit-keyframes passed-animation {
-  50%  {background: #088C08;}
+  50%  {background: #0fb30f;}
 }
 
 .build-outcome.failed {
@@ -75,5 +79,17 @@ footer {
 }
 
 @-webkit-keyframes failed-animation {
-  50%  {background: #BF0E0E;}
+  50%  {background: #b30f0f;}
+}
+
+.build-outcome.working {
+  background-color: #0b0b84;
+}
+
+.build-outcome:first-child.working {
+  -webkit-animation: working-animation 3s infinite;
+}
+
+@-webkit-keyframes working-animation {
+  50%  {background: #0f0fb3;}
 }

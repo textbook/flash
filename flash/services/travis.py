@@ -25,10 +25,11 @@ class TravisOS(Service):
 
     OUTCOMES = {
         'canceled': 'cancelled',
+        'created': 'working',
         'failed': 'failed',
         'passed': 'passed',
+        'started': 'working',
         '?': 'crashed',
-        '??': 'working',
     }
     REQUIRED = {'account', 'app'}
     ROOT = 'https://api.travis-ci.org'
