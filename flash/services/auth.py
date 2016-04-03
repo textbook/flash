@@ -1,4 +1,5 @@
 """Mix-in classes for implementing service authentication."""
+# pylint: disable=too-few-public-methods
 
 
 class TokenAuthMixin:
