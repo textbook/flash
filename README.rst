@@ -38,16 +38,16 @@ The configuration, either saved in ``config.json`` at the project root or as the
 
 The current supported service names are:
 
- * ``github`` - for project repositories on `GitHub`_ (requires ``api_token``,
-   ``account`` (the name of the account the project is in, e.g. ``"textbook"``)
-   and ``app`` (the name of the project application within that account, e.g.
-   ``"flash"``)).
+* ``github`` - for project repositories on `GitHub`_ (requires ``api_token``,
+  ``account`` (the name of the account the project is in, e.g. ``"textbook"``)
+  and ``app`` (the name of the project application within that account, e.g.
+  ``"flash"``)).
 
- * ``codeship`` - for CI builds on `Codeship`_ (requires ``api_token`` and
-   ``project_id``).
+* ``codeship`` - for CI builds on `Codeship`_ (requires ``api_token`` and
+  ``project_id``).
 
- * ``tracker`` - for projects on `Pivotal Tracker`_ (requires ``api_token`` and
-   ``project_id``).
+* ``tracker`` - for projects on `Pivotal Tracker`_ (requires ``api_token`` and
+  ``project_id``).
 
 
 Running it
