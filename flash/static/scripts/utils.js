@@ -5,6 +5,12 @@ function lastUpdate (paneSelector) {
   );
 }
 
+function updateCommit (element, data) {
+  ['author', 'committed', 'message'].forEach(function (attr) {
+    element.children('.' + attr).text(data[attr]);
+  });
+}
+
 function updateOutcome (element, data) {
   element.removeClass('passed failed crashed cancelled working');
   element.addClass(data.outcome);
@@ -13,9 +19,9 @@ function updateOutcome (element, data) {
   });
 }
 
-function updateOutcomes(pane, builds) {
-  var outcomes = pane.children('.build-outcome');
-  builds.slice(0, 4).forEach(function (build, index) {
-    updateOutcome(outcomes.eq(index), build);
+function updateItems(pane, items, selector, updater) {
+  var elements = pane.children(selector);
+  items.slice(0, 4).forEach(function (item, index) {
+    updater(elements.eq(index), item);
   });
 }

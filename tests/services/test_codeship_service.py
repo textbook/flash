@@ -16,9 +16,10 @@ def test_tracker_service_type():
 
 
 def test_correct_config():
-    assert Codeship.TEMPLATE == 'codeship'
+    assert Codeship.AUTH_PARAM == 'api_key'
     assert Codeship.REQUIRED == {'api_token', 'project_id'}
     assert Codeship.ROOT == 'https://codeship.com/api/v1'
+    assert Codeship.TEMPLATE == 'codeship'
 
 
 @mock.patch('flash.services.codeship.logger.debug')
@@ -71,7 +72,7 @@ def test_formatting():
         name='foo',
         builds=[dict(
             author='textbook',
-            elapsed='Took 6 minutes',
+            elapsed='took 6 minutes',
             message='hello world',
             outcome='passed',
         )]
@@ -96,7 +97,7 @@ def test_unfinished_formatting():
         name='foo',
         builds=[dict(
             author='textbook',
-            elapsed='Elapsed time not available',
+            elapsed='elapsed time not available',
             message='some much longer...',
             outcome='passed',
         )]

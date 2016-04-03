@@ -9,7 +9,7 @@ function codeshipUpdate () {
         );
       }
       if (data.builds) {
-        updateOutcomes(pane, data.builds);
+        updateItems(pane, data.builds, '.build-outcome', updateOutcome);
       }
       lastUpdate('#codeship-service');
     }

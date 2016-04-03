@@ -3,10 +3,12 @@
 from collections import OrderedDict
 
 from .codeship import Codeship
+from .github import GitHub
 from .tracker import Tracker
 
 SERVICES = dict(
     codeship=Codeship,
+    github=GitHub,
     tracker=Tracker,
 )
 """:py:class:`dict`: The services available to the application."""
