@@ -73,7 +73,7 @@ def test_formatting():
             author='textbook',
             elapsed='Took 6 minutes',
             message='hello world',
-            outcome='success',
+            outcome='passed',
         )]
     )
 
@@ -98,6 +98,6 @@ def test_unfinished_formatting():
             author='textbook',
             elapsed='Elapsed time not available',
             message='some much longer...',
-            outcome='success',
+            outcome='passed',
         )]
     )

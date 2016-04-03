@@ -21,6 +21,13 @@ class Codeship(UrlParamMixin, Service):
     """
 
     AUTH_PARAM = 'api_key'
+    OUTCOMES = {
+        'success': 'passed',
+        'error': 'failed',
+        '?': 'crashed',
+        '??': 'cancelled',
+        '???': 'working',
+    }
     REQUIRED = {'api_token', 'project_id'}
     ROOT = 'https://codeship.com/api/v1'
     TEMPLATE = 'codeship'
@@ -58,8 +65,8 @@ class Codeship(UrlParamMixin, Service):
             name=data.get('repository_name'),
         )
 
-    @staticmethod
-    def format_build(build):
+    @classmethod
+    def format_build(cls, build):
         """Re-format the build data for the front-end.
 
         Arguments:
@@ -75,10 +82,14 @@ class Codeship(UrlParamMixin, Service):
                 parse(build.get('finished_at')),
             )
         except (AttributeError, ValueError):
+            logger.exception('failed to parse time data')
             elapsed = 'Elapsed time not available'
+        status = build.get('status')
+        if status not in cls.OUTCOMES:
+            logger.warning('unknown status: %s', status)
         return dict(
             author=build.get('github_username'),
             elapsed=elapsed,
             message=truncate(build.get('message')),
-            outcome=build.get('status'),
+            outcome=cls.OUTCOMES.get(status),
         )

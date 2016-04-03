@@ -54,26 +54,26 @@ footer {
   color: rgb(128, 128, 128)
 }
 
-.build-outcome.success {
+.build-outcome.passed {
   background-color: #076707;
 }
 
-.build-outcome:first-child.success {
-  -webkit-animation: success-animation 3s infinite;
+.build-outcome:first-child.passed {
+  -webkit-animation: passed-animation 3s infinite;
 }
 
-@-webkit-keyframes success-animation {
+@-webkit-keyframes passed-animation {
   50%  {background: #088C08;}
 }
 
-.build-outcome.error {
+.build-outcome.failed {
   background-color: #840B0B;
 }
 
-.build-outcome:first-child.error {
-  -webkit-animation: error-animation 3s infinite;
+.build-outcome:first-child.failed {
+  -webkit-animation: failed-animation 3s infinite;
 }
 
-@-webkit-keyframes error-animation {
+@-webkit-keyframes failed-animation {
   50%  {background: #BF0E0E;}
 }

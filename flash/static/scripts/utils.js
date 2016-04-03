@@ -6,7 +6,7 @@ function lastUpdate (paneSelector) {
 }
 
 function updateOutcome (element, data) {
-  element.removeClass('success error');
+  element.removeClass('passed failed crashed cancelled working');
   element.addClass(data.outcome);
   ['author', 'elapsed', 'message', 'outcome'].forEach(function (attr) {
     element.children('.' + attr).text(data[attr]);
