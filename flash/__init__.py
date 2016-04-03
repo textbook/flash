@@ -1,4 +1,4 @@
-"""Flask project dashboards."""
+"""A project dashboard that works."""
 import logging
 
 from .flash import app
