@@ -42,7 +42,7 @@ def test_update_success(get, debug, service):
         'https://api.travis-ci.org/repos/foo/bar/builds',
         headers=HEADERS,
     )
-    debug.assert_called_once_with('fetching TravisCI project data')
+    debug.assert_called_once_with('fetching Travis CI project data')
     assert result == {'builds': [], 'name': 'foo/bar'}
 
 
@@ -57,7 +57,7 @@ def test_update_failure(get, error, service):
         'https://api.travis-ci.org/repos/foo/bar/builds',
         headers=HEADERS,
     )
-    error.assert_called_once_with('failed to update TravisCI project data')
+    error.assert_called_once_with('failed to update Travis CI project data')
     assert result == {}
 
 
