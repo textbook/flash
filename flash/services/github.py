@@ -51,8 +51,7 @@ class GitHub(UrlParamMixin, Service):
         )
         if response.status_code == 200:
             return self.format_data(self.repo, response.json())
-        else:
-            logger.error('failed to update GitHub project data')
+        logger.error('failed to update GitHub project data')
         return {}
 
     @classmethod

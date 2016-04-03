@@ -49,6 +49,9 @@ The current supported service names are:
 * ``tracker`` - for projects on `Pivotal Tracker`_ (requires ``api_token`` and
   ``project_id``).
 
+* ``travis`` - for CI builds on `Travis CI`_ (requires ``app`` and ``account``,
+  currently only supports open-source builds on the ``.org`` site).
+
 
 Running it
 ----------
@@ -71,3 +74,4 @@ The easiest way to install Flash for development is:
 .. _Flask: http://flask.pocoo.org/
 .. _GitHub: https://github.com/
 .. _Pivotal Tracker: https://www.pivotaltracker.com/
+.. _Travis CI: https://travis-ci.org/

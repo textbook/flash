@@ -38,9 +38,6 @@ TWO_DAYS_AGO = (datetime.now() - timedelta(days=2, hours=12)).strftime(
     }}],
 })
 def test_update_success(get, debug, service):
-    service.project_version = 2
-    service._cached = {'foo': 'bar'}
-
     result = service.update()
 
     get.assert_called_once_with(

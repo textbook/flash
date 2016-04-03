@@ -5,11 +5,13 @@ from collections import OrderedDict
 from .codeship import Codeship
 from .github import GitHub
 from .tracker import Tracker
+from .travis import TravisOS
 
 SERVICES = dict(
     codeship=Codeship,
     github=GitHub,
     tracker=Tracker,
+    travis=TravisOS,
 )
 """:py:class:`dict`: The services available to the application."""
 

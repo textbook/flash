@@ -42,8 +42,7 @@ class Codeship(UrlParamMixin, Service):
         )
         if response.status_code == 200:
             return self.format_data(response.json())
-        else:
-            logger.error('failed to update Codeship project data')
+        logger.error('failed to update Codeship project data')
         return {}
 
     @classmethod

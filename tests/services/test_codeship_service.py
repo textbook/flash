@@ -28,9 +28,6 @@ def test_correct_config():
     'return_value.json.return_value': {'repository_name': 'bar'},
 })
 def test_update_success(get, debug, service):
-    service.project_version = 2
-    service._cached = {'foo': 'bar'}
-
     result = service.update()
 
     get.assert_called_once_with(

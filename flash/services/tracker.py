@@ -1,4 +1,5 @@
 """Defines the Pivotal Tracker service integration."""
+
 import logging
 import requests
 
@@ -67,6 +68,5 @@ class Tracker(HeaderMixin, Service):
                 self._cached = data
                 return data
             return self._cached
-        else:
-            logger.error('failed to update Tracker project data')
+        logger.error('failed to update Tracker project data')
         return {}
