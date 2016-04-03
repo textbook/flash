@@ -50,17 +50,26 @@ class TravisOS(Service):
         return headers
 
     def update(self):
-        logger.debug('fetching TravisCI project data')
+        logger.debug('fetching Travis CI project data')
         response = requests.get(
             self._url_builder('/repos/{repo}/builds', {'repo': self.repo}),
             headers=self.headers,
         )
         if response.status_code == 200:
             return self.format_data(response.json())
-        logger.error('failed to update TravisCI project data')
+        logger.error('failed to update Travis CI project data')
         return {}
 
     def format_data(self, data):
+        """Re-format the response data for the front-end.
+
+        Arguments:
+          data (:py:class:`dict`): The JSON data from the response.
+
+        Returns:
+          :py:class:`dict`: The re-formatted data.
+
+        """
         commits = {commit['id']: commit for commit in data.get('commits', [])}
         return dict(
             name=self.repo,
@@ -72,6 +81,16 @@ class TravisOS(Service):
 
     @classmethod
     def format_build(cls, build, commit):
+        """Re-format the build and commit data for the front-end.
+
+        Arguments:
+          build (:py:class:`dict`): The build data from the response.
+          commit (:py:class:`dict`): The commit data from the response.
+
+        Returns:
+          :py:class:`dict`: The re-formatted data.
+
+        """
         status = build.get('state')
         if status not in cls.OUTCOMES:
             logger.warning('unknown status: %s', status)
