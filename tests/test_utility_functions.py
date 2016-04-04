@@ -1,6 +1,7 @@
+from datetime import datetime
 from unittest import mock
 
-from flash.flash import parse_config, update_service
+from flash.flash import cache, parse_config, update_service
 
 CONFIG_STRING = '{"name":"foo","services":[]}'
 
@@ -63,4 +64,17 @@ def test_update_result(logger):
 
     assert result == mock_result
     logger.warning.assert_not_called()
+    mock_service.update.assert_called_once_with()
+
+
+@mock.patch.dict(cache, {'foo': {
+    'data': {'foo': 'bar'},
+    'updated': datetime(2011, 12, 13, 14, 15, 16),
+}}, clear=True)
+def test_update_cached():
+    mock_service = mock.MagicMock(**{'update.return_value': None})
+
+    result = update_service('foo', {'foo': mock_service})
+
+    assert result == {'foo': 'bar', 'last_updated': '2011-12-13'}
     mock_service.update.assert_called_once_with()

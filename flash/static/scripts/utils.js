@@ -1,8 +1,5 @@
-function lastUpdate (paneSelector) {
-  var now = new Date();
-  $(paneSelector + ' .last-update').text(
-    'Last update: ' + now.toDateString() + ' ' + now.toLocaleTimeString()
-  );
+function lastUpdate (paneSelector, updated) {
+  $(paneSelector + ' .last-update').text('Last update: ' + (updated || 'unknown'));
 }
 
 function updateCommit (element, data) {

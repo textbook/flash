@@ -1,6 +1,7 @@
 """The main Flask application."""
 import json
 import logging
+from datetime import datetime, date, timedelta
 from os import getenv, path
 
 from flask import Flask, jsonify, render_template, request
@@ -11,6 +12,8 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 app.secret_key = getenv('FLASK_SECRET_KEY', 'youwillneverguessit')
+
+cache = {}
 
 
 def parse_config():
@@ -76,12 +79,29 @@ def update_service(name, service_map):
       :py:class:`dict`: The updated data.
 
     """
+    data = None
     if name in service_map:
         data = service_map[name].update()
         if not data:
-            data = {}
             logger.warning('no data received for service: %s', name)
+        else:
+            cache[name] = dict(data=data, updated=datetime.now())
     else:
         logger.warning('service not found: %s', name)
-        data = {}
-    return data
+    if name in cache:
+        return add_time(cache[name])
+    return {}
+
+
+def add_time(data):
+    payload = data['data']
+    updated = data['updated'].date()
+    if updated == date.today():
+        payload['last_updated'] = data['updated'].strftime('today at %H:%M:%S')
+    elif updated >= (date.today() - timedelta(days=1)):
+        payload['last_updated'] = 'yesterday'
+    elif updated >= (date.today() - timedelta(days=7)):
+        payload['last_updated'] = updated.strftime('on %A')
+    else:
+        payload['last_updated'] = updated.strftime('%Y-%m-%d')
+    return payload

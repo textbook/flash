@@ -4,7 +4,7 @@ function trackerUpdate () {
       console.debug('received Tracker data', data);
       if (data.name) { $('#tracker-service .project-name').text(data.name); }
       if (data.velocity){ $('.tracker-pane .velocity').text(data.velocity); }
-      lastUpdate('#tracker-service');
+      lastUpdate('#tracker-service', data.last_updated);
     }
   });
 }
