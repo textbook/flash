@@ -12,7 +12,7 @@ from tests.helpers import slow
 def test_home_page_accessible(selenium):
     go_to_home_page(selenium)
     WebDriverWait(selenium, 5).until(expected_conditions.title_is(
-        'Flash - Flask Dashboard'
+        'Flask + Dashboard = Flash'
     ))
     assert selenium.find_element(By.CLASS_NAME, 'headline').text == 'PROJECT GNOME'
 
