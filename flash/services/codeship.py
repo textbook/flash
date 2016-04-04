@@ -25,7 +25,7 @@ class Codeship(UrlParamMixin, Service):
         'error': 'failed',
         '?': 'crashed',
         '??': 'cancelled',
-        '???': 'working',
+        'testing': 'working',
     }
     REQUIRED = {'api_token', 'project_id'}
     ROOT = 'https://codeship.com/api/v1'
