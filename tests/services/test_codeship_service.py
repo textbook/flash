@@ -76,7 +76,8 @@ def test_formatting():
     )
 
 
-def test_unfinished_formatting():
+@mock.patch('flash.services.codeship.logger.warning')
+def test_unfinished_formatting(warning):
     response = dict(
         repository_name='foo',
         builds=[dict(
@@ -84,7 +85,7 @@ def test_unfinished_formatting():
             github_username='textbook',
             message='some much longer message',
             started_at='2016-04-01T23:04:03.050Z',
-            status='success',
+            status='garbage',
         )],
     )
 
@@ -96,6 +97,7 @@ def test_unfinished_formatting():
             author='textbook',
             elapsed='elapsed time not available',
             message='some much longer...',
-            outcome='passed',
+            outcome=None,
         )]
     )
+    warning.assert_called_once_with('unknown status: %s', 'garbage')

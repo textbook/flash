@@ -53,7 +53,7 @@ class TravisOS(Service):
     def update(self):
         logger.debug('fetching Travis CI project data')
         response = requests.get(
-            self._url_builder('/repos/{repo}/builds', {'repo': self.repo}),
+            self.url_builder('/repos/{repo}/builds', {'repo': self.repo}),
             headers=self.headers,
         )
         if response.status_code == 200:

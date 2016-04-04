@@ -40,7 +40,7 @@ class Tracker(HeaderMixin, Service):
           :py:class:`dict`: The project data from the API.
 
         """
-        url = self._url_builder(
+        url = self.url_builder(
             '/projects/{id}/iterations/{number}',
             {'number': data['current_iteration_number'], 'id': self.project_id},
             {'fields': ':default,velocity'},
@@ -53,7 +53,7 @@ class Tracker(HeaderMixin, Service):
             logger.error('failed to update project velocity')
 
     def update(self):
-        url = self._url_builder('/projects/{id}', {'id': self.project_id})
+        url = self.url_builder('/projects/{id}', {'id': self.project_id})
         logger.debug('fetching Tracker project data')
         response = requests.get(url, headers=self.headers)
         if response.status_code == 200:

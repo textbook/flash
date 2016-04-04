@@ -24,7 +24,7 @@ class UrlParamMixin(TokenAuthMixin):
         if url_params is None:
             url_params = {}
         url_params[self.AUTH_PARAM] = self.api_token
-        return super()._url_builder(endpoint, params, url_params)
+        return super().url_builder(endpoint, params, url_params)
 
 
 class HeaderMixin(TokenAuthMixin):

@@ -66,3 +66,37 @@ def test_update_failure(get, error, service):
     error.assert_called_once_with('failed to update GitHub project data')
     assert result == {}
 
+
+@pytest.mark.parametrize('input_, expected', [
+    (dict(), dict(author=None, committed='time not available', message='')),
+    (
+        dict(
+            author=dict(name='alice'),
+            committer=dict(name='bob'),
+            message='hello world',
+        ),
+        dict(
+            author='alice [bob]',
+            committed='time not available',
+            message='hello world',
+        ),
+    ),
+    (
+        dict(author=dict(name='alice'), message='hello world'),
+        dict(
+            author='alice',
+            committed='time not available',
+            message='hello world',
+        ),
+    ),
+    (
+        dict(committer=dict(name='bob'), message='hello world'),
+        dict(
+            author='bob',
+            committed='time not available',
+            message='hello world',
+        ),
+    ),
+])
+def test_format_commit(input_, expected):
+    assert GitHub.format_commit(input_) == expected

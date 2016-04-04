@@ -36,5 +36,5 @@ def define_services(config):
             raise ValueError('unknown service {!r}'.format(name))
         if name in services:
             raise ValueError('duplicate service {!r}'.format(name))
-        services[name] = SERVICES[name](**settings)
+        services[name] = SERVICES[name].from_config(**settings)
     return services

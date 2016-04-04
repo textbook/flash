@@ -93,3 +93,23 @@ def test_update_failure(get, error, service):
     )
     error.assert_called_once_with('failed to update Tracker project data')
     assert result == {}
+
+
+@mock.patch('flash.services.tracker.logger.debug')
+@mock.patch('flash.services.tracker.requests.get', **{
+    'return_value.status_code': 200,
+    'return_value.headers': {'X-Tracker-Project-Version': '2'},
+    'return_value.json.return_value': {'foo': 'bar'},
+})
+@mock.patch.object(Tracker, '_get_velocity')
+def test_update_get_velocity(_get_velocity, get, debug, service):
+    service.project_version = 1
+    service._cached = {'foo': 'bar'}
+
+    service.update()
+
+    _get_velocity.assert_called_once_with({'foo': 'bar'})
+    debug.assert_has_calls([
+        mock.call('fetching Tracker project data'),
+        mock.call('project updated, fetching velocity'),
+    ])

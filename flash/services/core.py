@@ -22,14 +22,14 @@ class Service(metaclass=ABCMeta):
     @abstractmethod
     def update(self):
         """Get the current state to display on the dashboard."""
-        pass
+        raise NotImplementedError
 
     @property
     def headers(self):
         """Get the headers for the service requests."""
         return {}
 
-    def _url_builder(self, endpoint, params=None, url_params=None):
+    def url_builder(self, endpoint, params=None, url_params=None):
         """Create a URL for the specified endpoint.
 
         Arguments:

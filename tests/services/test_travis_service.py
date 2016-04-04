@@ -88,11 +88,12 @@ def test_formatting(service):
     )
 
 
-def test_unfinished_formatting(service):
+@mock.patch('flash.services.travis.logger.warning')
+def test_unfinished_formatting(warning, service):
     response = dict(
         builds=[dict(
             commit_id=123456,
-            state='passed',
+            state='garbage',
         )],
         commits=[dict(
             author_name='alice',
@@ -109,6 +110,7 @@ def test_unfinished_formatting(service):
             author='alice',
             elapsed='elapsed time not available',
             message='some much longer...',
-            outcome='passed',
+            outcome=None,
         )]
     )
+    warning.assert_called_once_with('unknown status: %s', 'garbage')

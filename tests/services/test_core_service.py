@@ -50,4 +50,4 @@ def test_required_config(config):
     ),
 ])
 def test_url_builder(input_,expected):
-    assert Test()._url_builder(*input_) == expected
+    assert Test().url_builder(*input_) == expected
