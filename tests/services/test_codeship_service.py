@@ -69,7 +69,7 @@ def test_formatting():
         name='foo',
         builds=[dict(
             author='textbook',
-            elapsed='took 6 minutes',
+            elapsed='took six minutes',
             message='hello world',
             outcome='passed',
         )]

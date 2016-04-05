@@ -81,7 +81,7 @@ def test_formatting(service):
         name='foo/bar',
         builds=[dict(
             author='alice',
-            elapsed='took 9 minutes',
+            elapsed='took nine minutes',
             message='hello world',
             outcome='passed',
         )]

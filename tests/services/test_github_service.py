@@ -48,7 +48,7 @@ def test_update_success(get, debug, service):
     assert result == {'commits': [{
         'message': 'commit message',
         'author': 'alice [bob]',
-        'committed': '2 days ago'
+        'committed': 'two days ago'
     }], 'name': 'foo/bar'}
 
 

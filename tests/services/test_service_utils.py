@@ -3,7 +3,7 @@ from unittest import mock
 
 import pytest
 
-from flash.services.utils import elapsed_time, occurred, truncate
+from flash.services.utils import (elapsed_time, friendlier, occurred, truncate)
 
 TWO_DAYS_AGO = datetime.now() - timedelta(days=2, hours=12)
 
@@ -19,8 +19,8 @@ def test_truncate(input_, expected):
 
 @pytest.mark.parametrize('input_, expected, logged', [
     ((None,), 'time not available', True),
-    ((TWO_DAYS_AGO.strftime('%Y-%m-%dT%H:%M:%SZ'),), '2 days ago', False),
-    ((TWO_DAYS_AGO.strftime('%Y-%m-%dT%H:%M:%S'),), '2 days ago', False),
+    ((TWO_DAYS_AGO.strftime('%Y-%m-%dT%H:%M:%SZ'),), 'two days ago', False),
+    ((TWO_DAYS_AGO.strftime('%Y-%m-%dT%H:%M:%S'),), 'two days ago', False),
 ])
 @mock.patch('flash.services.utils.logger.exception')
 def test_occurred(exception, input_, expected, logged):
@@ -35,7 +35,7 @@ def test_occurred(exception, input_, expected, logged):
     ((None, None), 'elapsed time not available', True),
     (('2011-12-13T14:15:16', None), 'elapsed time not available', True),
     ((None, '2011-12-13T14:15:16'), 'elapsed time not available', True),
-    (('2011-12-11T02:15:16', '2011-12-13T14:15:16'), 'took 2 days', False),
+    (('2011-12-11T02:15:16', '2011-12-13T14:15:16'), 'took two days', False),
 ])
 @mock.patch('flash.services.utils.logger.exception')
 def test_elapsed_time(exception, input_, expected, logged):
@@ -44,3 +44,13 @@ def test_elapsed_time(exception, input_, expected, logged):
         exception.assert_called_once_with('failed to generate elapsed time')
     else:
         exception.assert_not_called()
+
+
+@pytest.mark.parametrize('text, expected', [
+    ('this contains 1, 10 and 100', 'this contains one, ten and 100'),
+    ('this contains 6', 'this contains six'),
+    ('1', 'one'),
+    ('11', '11'),
+])
+def test_numeric_words(text, expected):
+    assert friendlier(lambda s: s)(text) == expected
