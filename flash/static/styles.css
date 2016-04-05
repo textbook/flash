@@ -1,8 +1,8 @@
 body {
   background-color: #1D1D1D;
-  color: #dddddd;
+  color: #edeaea;
   font-family: Helvetica Neue, sans-serif;
-  margin: 5%;
+  margin: 1rem;
 }
 
 h1 {
@@ -13,15 +13,21 @@ h1 {
 }
 
 .service-tile {
+  background: rgba(80, 255, 153, 0.1);
+  border-radius: 5px;
+  font-size: 1.8rem;
   margin: 40px 0;
+  padding: 1rem;
 }
 
 .service-name {
-  font-size: 2rem;
+  font-size: 3rem;
+  text-transform: uppercase;
 }
 
 .pane {
   display: flex;
+  height: 200px;
 }
 
 .service-caption {
@@ -32,12 +38,13 @@ h1 {
 .pane-item {
   background: gray;
   border-radius: 5px;
+  flex-grow: 1;
   margin: 10px;
   padding: 10px;
 }
 
 .pane-item .message {
-  font-size: 1.45rem;
+  font-weight: bold;
 }
 
 footer {
@@ -48,10 +55,6 @@ footer {
   position: absolute;
   text-align: center;
   width: 100%
-}
-
-.last-update, .project-name {
-  color: rgb(128, 128, 128)
 }
 
 .pane-item.commit {
