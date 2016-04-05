@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 app.secret_key = getenv('FLASK_SECRET_KEY', 'youwillneverguessit')
 
-cache = {}
+CACHE = {}
 
 
 def parse_config():
@@ -79,21 +79,29 @@ def update_service(name, service_map):
       :py:class:`dict`: The updated data.
 
     """
-    data = None
     if name in service_map:
         data = service_map[name].update()
         if not data:
             logger.warning('no data received for service: %s', name)
         else:
-            cache[name] = dict(data=data, updated=datetime.now())
+            CACHE[name] = dict(data=data, updated=datetime.now())
     else:
         logger.warning('service not found: %s', name)
-    if name in cache:
-        return add_time(cache[name])
+    if name in CACHE:
+        return add_time(CACHE[name])
     return {}
 
 
 def add_time(data):
+    """And a friendly update time to the supplied data.
+
+    Arguments:
+      data (:py:class:`dict`): The response data and its update time.
+
+    Returns:
+      :py:class:`dict`: The data with a friendly update time.
+
+    """
     payload = data['data']
     updated = data['updated'].date()
     if updated == date.today():

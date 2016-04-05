@@ -1,7 +1,7 @@
 from datetime import datetime
 from unittest import mock
 
-from flash.flash import cache, parse_config, update_service
+from flash.flash import CACHE, parse_config, update_service
 
 CONFIG_STRING = '{"name":"foo","services":[]}'
 
@@ -67,7 +67,7 @@ def test_update_result(logger):
     mock_service.update.assert_called_once_with()
 
 
-@mock.patch.dict(cache, {'foo': {
+@mock.patch.dict(CACHE, {'foo': {
     'data': {'foo': 'bar'},
     'updated': datetime(2011, 12, 13, 14, 15, 16),
 }}, clear=True)
