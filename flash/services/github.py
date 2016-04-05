@@ -68,7 +68,7 @@ class GitHub(UrlParamMixin, Service):
         """
         return dict(
             commits=[cls.format_commit(commit.get('commit', {}))
-                     for commit in data or []],
+                     for commit in data[:5] or []],
             name=name,
         )
 

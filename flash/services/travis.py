@@ -76,7 +76,7 @@ class TravisOS(Service):
             name=self.repo,
             builds=[
                 self.format_build(bld, commits.get(bld.get('commit_id'), {}))
-                for bld in data.get('builds', [])
+                for bld in data.get('builds', [])[:5]
             ]
         )
 

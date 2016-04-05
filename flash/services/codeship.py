@@ -58,7 +58,7 @@ class Codeship(UrlParamMixin, Service):
         """
         return dict(
             builds=[
-                cls.format_build(build) for build in data.get('builds', [])
+                cls.format_build(build) for build in data.get('builds', [])[:5]
             ],
             name=data.get('repository_name'),
         )
