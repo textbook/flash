@@ -12,6 +12,10 @@ Flash
 .. image:: https://www.quantifiedcode.com/api/v1/project/3b65c038488c41d3a1a12f3bc9bb1bd8/badge.svg
   :target: https://www.quantifiedcode.com/app/project/3b65c038488c41d3a1a12f3bc9bb1bd8
   :alt: Code Issues
+  
+.. image:: https://api.codacy.com/project/badge/grade/cef9c42119be41fc99ff7e89ffdd8cd6    
+  :target: https://www.codacy.com/app/j-r-sharpe-github/flash
+  :alt: Other Code Issues
 
 .. image:: https://img.shields.io/badge/license-ISC-blue.svg
   :target: https://github.com/textbook/halliwell/blob/master/LICENSE
