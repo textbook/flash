@@ -11,7 +11,6 @@ function githubUpdate () {
       if (data.commits) {
         updateItems(pane, data.commits, '.commit', updateCommit);
       }
-      lastUpdate('#github-service', data.last_updated);
     }
   });
 }

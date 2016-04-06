@@ -1,7 +1,3 @@
-function lastUpdate (paneSelector, updated) {
-  $(paneSelector + ' .last-update').text('Last update: ' + (updated || 'unknown'));
-}
-
 function updateCommit (element, data) {
   ['author', 'committed', 'message'].forEach(function (attr) {
     element.children('.' + attr).text(data[attr]);

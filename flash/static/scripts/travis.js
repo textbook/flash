@@ -11,7 +11,6 @@ function travisUpdate () {
       if (data.builds) {
         updateItems(pane, data.builds, '.build-outcome', updateOutcome);
       }
-      lastUpdate('#travis-service', data.last_updated);
     }
   });
 }

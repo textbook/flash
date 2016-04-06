@@ -11,7 +11,6 @@ function codeshipUpdate () {
       if (data.builds) {
         updateItems(pane, data.builds, '.build-outcome', updateOutcome);
       }
-      lastUpdate('#codeship-service', data.last_updated);
     }
   });
 }

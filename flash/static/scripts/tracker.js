@@ -11,7 +11,6 @@ function trackerUpdate () {
           (data.stories.finished || 0) + (data.stories.delivered || 0)
         );
       }
-      lastUpdate('#tracker-service', data.last_updated);
     }
   });
 }
