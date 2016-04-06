@@ -6,8 +6,20 @@
   </div>
   <section class="pane tracker-pane">
     <div class="pane-item">
-      <span class="item-title">Current velocity: </span>
+      <span class="item-title">Velocity: </span>
       <span class="velocity"></span>
+    </div>
+    <div class="pane-item">
+      <span class="item-title">In flight: </span>
+      <span class="in-flight"></span>
+    </div>
+    <div class="pane-item">
+      <span class="item-title">Completed: </span>
+      <span class="completed"></span>
+    </div>
+    <div class="pane-item">
+      <span class="item-title">Accepted: </span>
+      <span class="accepted"></span>
     </div>
   </section>
   <script src="{{ url_for('static', filename='scripts/tracker.js') }}"></script>

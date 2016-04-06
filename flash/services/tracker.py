@@ -1,5 +1,6 @@
 """Defines the Pivotal Tracker service integration."""
 
+from collections import Counter
 import logging
 import requests
 
@@ -33,24 +34,45 @@ class Tracker(HeaderMixin, Service):
         self.project_version = 0
         self._cached = dict(name='unknown', velocity='unknown')
 
-    def _get_velocity(self, data):
-        """Update the project data with the current velocity.
+    def details(self, iteration):
+        """Update the project data with more details.
 
         Arguments:
-          :py:class:`dict`: The project data from the API.
+          iteration (:py:class:`int`): The current iteration number.
+
+        Returns:
+          :py:class:`dict`: Additional detail on the current iteration.
 
         """
         url = self.url_builder(
             '/projects/{id}/iterations/{number}',
-            {'number': data['current_iteration_number'], 'id': self.project_id},
-            {'fields': ':default,velocity'},
+            {'number': iteration, 'id': self.project_id},
+            {'fields': ':default,velocity,stories'},
         )
         response = requests.get(url, headers=self.headers)
         if response.status_code == 200:
-            velocity = response.json().get('velocity', 'unknown')
-            data['velocity'] = velocity
+            update = response.json()
+            return dict(
+                stories=self.story_summary(update.get('stories', [])),
+                velocity=update.get('velocity', 'unknown'),
+            )
         else:
-            logger.error('failed to update project velocity')
+            logger.error('failed to update project iteration details')
+        return {}
+
+    @staticmethod
+    def story_summary(stories):
+        """Get a summary count of stories in each state.
+
+        Arguments:
+          stories (:py:class:`list`): A list of stories.
+
+        Returns:
+          :py:class:`collections.Counter`: Summary of counts by story
+            state.
+
+        """
+        return Counter(story['current_state'] for story in stories)
 
     def update(self):
         url = self.url_builder('/projects/{id}', {'id': self.project_id})
@@ -61,9 +83,10 @@ class Tracker(HeaderMixin, Service):
                 'X-Tracker-Project-Version', 0,
             ))
             if new_version > self.project_version:
-                data = response.json()
-                logger.debug('project updated, fetching velocity')
-                self._get_velocity(data)
+                raw_data = response.json()
+                data = {key: raw_data.get(key) for key in ['name', ]}
+                logger.debug('project updated, fetching iteration details')
+                data.update(self.details(raw_data['current_iteration_number']))
                 self.project_version = new_version
                 self._cached = data
                 return data

@@ -27,19 +27,20 @@ def test_headers(service):
 
 @mock.patch('flash.services.tracker.requests.get', **{
     'return_value.status_code': 200,
-    'return_value.json.return_value': {'velocity': 10},
+    'return_value.json.return_value': {
+        'velocity': 10,
+        'stories': [{'current_state': 'foo'}, {'current_state': 'foo'}],
+    },
 })
 def test_get_velocity_success(get, service):
-    data = {'current_iteration_number': 456}
-
-    service._get_velocity(data)
+    result = service.details(456)
 
     get.assert_called_once_with(
         ('https://www.pivotaltracker.com/services/v5/projects/123/'
-         'iterations/456?fields=:default,velocity'),
+         'iterations/456?fields=:default,velocity,stories'),
         headers={'X-TrackerToken': 'foobar'},
     )
-    assert data == {'current_iteration_number': 456, 'velocity': 10}
+    assert result == {'velocity': 10, 'stories': {'foo': 2}}
 
 
 @mock.patch('flash.services.tracker.logger.debug')
@@ -67,17 +68,15 @@ def test_update_success(get, debug, service):
     'return_value.status_code': 401,
 })
 def test_get_velocity_failure(get, error, service):
-    data = {'current_iteration_number': 456}
-
-    service._get_velocity(data)
+    result = service.details(456)
 
     get.assert_called_once_with(
         ('https://www.pivotaltracker.com/services/v5/projects/123/'
-         'iterations/456?fields=:default,velocity'),
+         'iterations/456?fields=:default,velocity,stories'),
         headers={'X-TrackerToken': 'foobar'},
     )
-    assert data == {'current_iteration_number': 456}
-    error.assert_called_once_with('failed to update project velocity')
+    assert result == {}
+    error.assert_called_once_with('failed to update project iteration details')
 
 
 @mock.patch('flash.services.tracker.logger.error')
@@ -99,17 +98,17 @@ def test_update_failure(get, error, service):
 @mock.patch('flash.services.tracker.requests.get', **{
     'return_value.status_code': 200,
     'return_value.headers': {'X-Tracker-Project-Version': '2'},
-    'return_value.json.return_value': {'foo': 'bar'},
+    'return_value.json.return_value': {'current_iteration_number': 1},
 })
-@mock.patch.object(Tracker, '_get_velocity')
-def test_update_get_velocity(_get_velocity, get, debug, service):
+@mock.patch.object(Tracker, 'details')
+def test_update_details(details, get, debug, service):
     service.project_version = 1
     service._cached = {'foo': 'bar'}
 
     service.update()
 
-    _get_velocity.assert_called_once_with({'foo': 'bar'})
+    details.assert_called_once_with(1)
     debug.assert_has_calls([
         mock.call('fetching Tracker project data'),
-        mock.call('project updated, fetching velocity'),
+        mock.call('project updated, fetching iteration details'),
     ])
