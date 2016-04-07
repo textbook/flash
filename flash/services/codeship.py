@@ -5,7 +5,7 @@ import requests
 
 from .auth import UrlParamMixin
 from .core import Service
-from .utils import elapsed_time, truncate
+from .utils import elapsed_time, health_summary, truncate
 
 logger = logging.getLogger(__name__)
 
@@ -56,10 +56,12 @@ class Codeship(UrlParamMixin, Service):
           :py:class:`dict`: The re-formatted data.
 
         """
+        builds = [
+            cls.format_build(build) for build in data.get('builds', [])[:5]
+        ]
         return dict(
-            builds=[
-                cls.format_build(build) for build in data.get('builds', [])[:5]
-            ],
+            builds=builds,
+            health=health_summary(builds),
             name=data.get('repository_name'),
         )
 

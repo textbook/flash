@@ -43,7 +43,7 @@ def test_update_success(get, debug, service):
         headers=HEADERS,
     )
     debug.assert_called_once_with('fetching Travis CI project data')
-    assert result == {'builds': [], 'name': 'foo/bar'}
+    assert result == {'builds': [], 'name': 'foo/bar', 'health': 'neutral'}
 
 
 @mock.patch('flash.services.travis.logger.error')
@@ -84,7 +84,8 @@ def test_formatting(service):
             elapsed='took nine minutes',
             message='hello world',
             outcome='passed',
-        )]
+        )],
+        health='ok',
     )
 
 
@@ -111,6 +112,7 @@ def test_unfinished_formatting(warning, service):
             elapsed='elapsed time not available',
             message='some much longer...',
             outcome=None,
-        )]
+        )],
+        health='neutral',
     )
     warning.assert_called_once_with('unknown status: %s', 'garbage')

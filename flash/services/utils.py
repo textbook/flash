@@ -103,3 +103,24 @@ def occurred(at_):
         return naturaltime((utc_now - occurred_at).total_seconds())
     except TypeError:  # at_ is a naive datetime
         return naturaltime((datetime.now() - occurred_at).total_seconds())
+
+
+def health_summary(builds):
+    """Summarise the health of a project based on builds.
+
+    Arguments:
+      builds (:py:class:`list`): List of builds.
+
+    Returns:
+      :py:class:`str`: The health summary.
+
+    """
+    for build in builds[:2]:
+        if build['outcome'] == 'working':
+            continue
+        if build['outcome'] == 'passed':
+            return 'ok'
+        elif build['outcome'] in ['failed', 'crashed']:
+            return 'error'
+        break
+    return 'neutral'

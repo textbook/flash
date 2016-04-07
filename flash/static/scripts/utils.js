@@ -18,3 +18,12 @@ function updateItems(pane, items, selector, updater) {
     updater(elements.eq(index), item);
   });
 }
+
+function setTileHealth(tile, health) {
+  tile.removeClass('tile-ok tile-error');
+  if (health === 'ok') {
+    tile.addClass('tile-ok');
+  } else if (health === 'error') {
+    tile.addClass('tile-error')
+  }
+}

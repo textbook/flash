@@ -11,6 +11,7 @@ function travisUpdate () {
       if (data.builds) {
         updateItems(pane, data.builds, '.build-outcome', updateOutcome);
       }
+      setTileHealth($('#travis-service'), data.health || 'neutral');
     }
   });
 }

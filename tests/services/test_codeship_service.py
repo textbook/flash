@@ -34,7 +34,7 @@ def test_update_success(get, debug, service):
         'https://codeship.com/api/v1/projects/123.json?api_key=foobar',
     )
     debug.assert_called_once_with('fetching Codeship project data')
-    assert result == {'builds': [], 'name': 'bar'}
+    assert result == {'builds': [], 'name': 'bar', 'health': 'neutral'}
 
 
 @mock.patch('flash.services.codeship.logger.error')
@@ -72,7 +72,8 @@ def test_formatting():
             elapsed='took six minutes',
             message='hello world',
             outcome='passed',
-        )]
+        )],
+        health='ok',
     )
 
 
@@ -98,6 +99,7 @@ def test_unfinished_formatting(warning):
             elapsed='elapsed time not available',
             message='some much longer...',
             outcome=None,
-        )]
+        )],
+        health='neutral',
     )
     warning.assert_called_once_with('unknown status: %s', 'garbage')

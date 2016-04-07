@@ -3,7 +3,8 @@ from unittest import mock
 
 import pytest
 
-from flash.services.utils import (elapsed_time, friendlier, occurred, truncate)
+from flash.services.utils import (elapsed_time, friendlier, health_summary,
+                                  occurred, truncate)
 
 TWO_DAYS_AGO = datetime.now() - timedelta(days=2, hours=12)
 
@@ -54,3 +55,13 @@ def test_elapsed_time(exception, input_, expected, logged):
 ])
 def test_numeric_words(text, expected):
     assert friendlier(lambda s: s)(text) == expected
+
+
+@pytest.mark.parametrize('builds, health', [
+    ([{'outcome': 'passed'}], 'ok'),
+    ([{'outcome': 'working'}, {'outcome': 'passed'}], 'ok'),
+    ([{'outcome': 'failed'}], 'error'),
+    ([{'outcome': 'working'}], 'neutral'),
+])
+def test_health_summary(builds, health):
+    assert health_summary(builds) == health

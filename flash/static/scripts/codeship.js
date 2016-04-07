@@ -11,6 +11,7 @@ function codeshipUpdate () {
       if (data.builds) {
         updateItems(pane, data.builds, '.build-outcome', updateOutcome);
       }
+      setTileHealth($('#codeship-service'), data.health || 'neutral');
     }
   });
 }

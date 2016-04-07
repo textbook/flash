@@ -5,7 +5,7 @@ import logging
 import requests
 
 from .core import Service
-from .utils import naturaldelta, truncate
+from .utils import health_summary, naturaldelta, truncate
 
 logger = logging.getLogger(__name__)
 
@@ -72,12 +72,14 @@ class TravisOS(Service):
 
         """
         commits = {commit['id']: commit for commit in data.get('commits', [])}
+        builds = [
+            self.format_build(build, commits.get(build.get('commit_id'), {}))
+            for build in data.get('builds', [])[:5]
+        ]
         return dict(
+            builds=builds,
+            health=health_summary(builds),
             name=self.repo,
-            builds=[
-                self.format_build(bld, commits.get(bld.get('commit_id'), {}))
-                for bld in data.get('builds', [])[:5]
-            ]
         )
 
     @classmethod
