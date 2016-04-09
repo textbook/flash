@@ -13,11 +13,24 @@ h1 {
 }
 
 .service-tile {
-  background: rgba(80, 255, 153, 0.1);
+  background: rgba(165, 165, 165, 0.1);
   border-radius: 5px;
   font-size: 1.8rem;
   margin: 40px 0;
   padding: 1rem;
+}
+
+.service-tile {
+  border-left: 15px solid rgb(66, 66, 66);
+}
+
+.service-tile.tile-ok {
+  border-left: 15px solid rgb(52, 123, 52);
+}
+
+.service-tile.tile-error {
+  border-left: 15px solid rgb(187, 52, 52);
+  -webkit-animation: failed-animation 5s infinite;
 }
 
 .service-name {
@@ -43,7 +56,7 @@ h1 {
 }
 
 .pane-item {
-  background: gray;
+  background: rgb(66, 66, 66);
   border-radius: 5px;
   flex-grow: 1;
   margin: 10px;
@@ -55,43 +68,27 @@ h1 {
 }
 
 .pane-item.commit {
-  background-color: #470b84;
+  background-color: #5D4A71;
 }
 
 .build-outcome.passed {
-  background-color: #0B840B;
-}
-
-.build-outcome:first-child.passed {
-  -webkit-animation: passed-animation 3s infinite;
-}
-
-@-webkit-keyframes passed-animation {
-  50%  {background: #0fb30f;}
+  background-color: rgb(52, 123, 52);
 }
 
 .build-outcome.failed {
-  background-color: #840B0B;
+  background-color: rgb(187, 52, 52);
 }
 
 .build-outcome:first-child.failed {
   -webkit-animation: failed-animation 3s infinite;
 }
 
-@-webkit-keyframes failed-animation {
-  50%  {background: #b30f0f;}
-}
-
 .build-outcome.working {
-  background-color: #0b0b84;
+  background-color: rgb(52, 123, 52);
 }
 
 .build-outcome:first-child.working {
   -webkit-animation: working-animation 3s infinite;
-}
-
-@-webkit-keyframes working-animation {
-  50%  {background: #0f0fb3;}
 }
 
 footer {
@@ -99,8 +96,16 @@ footer {
   bottom: 0;
   left: 0;
   padding: 10px;
-  position: absolute;
+  position: fixed;
   right: 0;
   text-align: center;
   width: 100%
+}
+
+@-webkit-keyframes failed-animation {
+  50%  {background: rgb(187, 52, 52);}
+}
+
+@-webkit-keyframes working-animation {
+  50%  {background: rgb(187, 52, 52);}
 }
