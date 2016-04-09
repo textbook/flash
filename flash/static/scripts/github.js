@@ -1,3 +1,6 @@
+/* global $, updateCommit, updateItems, $MINUTE */
+
+
 function githubUpdate () {
   $.getJSON($SERVICES, {name: 'github'}, function (data) {
     if (data) {

@@ -1,3 +1,5 @@
+/* global $, $MINUTE */
+
 function trackerUpdate () {
   $.getJSON($SERVICES, {name: 'tracker'}, function (data) {
     if (data) {

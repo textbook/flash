@@ -1,3 +1,5 @@
+/* global $, setTileHealth, updateItems, $MINUTE */
+
 function travisUpdate () {
   $.getJSON($SERVICES, {name: 'travis'}, function (data) {
     if (data) {

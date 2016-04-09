@@ -1,3 +1,5 @@
+/* global $, setTileHealth, updateItems, $MINUTE */
+
 function codeshipUpdate () {
   $.getJSON($SERVICES, {name: 'codeship'}, function (data) {
     if (data) {
