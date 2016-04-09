@@ -14,7 +14,7 @@ def test_home_page_accessible(selenium):
     WebDriverWait(selenium, 5).until(expected_conditions.title_is(
         'Flask + Dashboard = Flash'
     ))
-    assert selenium.find_element(By.CLASS_NAME, 'flash-project-name').text == 'PROJECT GNOME'
+    assert selenium.find_element(By.CLASS_NAME, 'flash-project-name').text.upper() == 'PROJECT GNOME'
 
 
 @pytest.mark.usefixtures('live_server')
