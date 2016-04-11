@@ -21,11 +21,12 @@ class Codeship(UrlParamMixin, Service):
 
     AUTH_PARAM = 'api_key'
     OUTCOMES = {
-        'success': 'passed',
+        'cancelled': 'cancelled',
         'error': 'failed',
-        '?': 'crashed',
-        '??': 'cancelled',
+        'stopped': 'cancelled',
+        'success': 'passed',
         'testing': 'working',
+        '?': 'crashed',
     }
     REQUIRED = {'api_token', 'project_id'}
     ROOT = 'https://codeship.com/api/v1'
