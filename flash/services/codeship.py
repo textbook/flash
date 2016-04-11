@@ -23,10 +23,10 @@ class Codeship(UrlParamMixin, Service):
     OUTCOMES = {
         'cancelled': 'cancelled',
         'error': 'failed',
+        'infrastructure_failure': 'crashed',
         'stopped': 'cancelled',
         'success': 'passed',
         'testing': 'working',
-        '?': 'crashed',
     }
     REQUIRED = {'api_token', 'project_id'}
     ROOT = 'https://codeship.com/api/v1'
