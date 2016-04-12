@@ -1,6 +1,6 @@
 """Defines the Pivotal Tracker service integration."""
 
-from collections import Counter
+from collections import defaultdict
 import logging
 import requests
 
@@ -62,17 +62,20 @@ class Tracker(HeaderMixin, Service):
 
     @staticmethod
     def story_summary(stories):
-        """Get a summary count of stories in each state.
+        """Get a summary of stories in each state.
 
         Arguments:
           stories (:py:class:`list`): A list of stories.
 
         Returns:
-          :py:class:`collections.Counter`: Summary of counts by story
-            state.
+          :py:class:`collections.defaultdict`: Summary of points by
+            story state.
 
         """
-        return Counter(story['current_state'] for story in stories)
+        result = defaultdict(int)
+        for story in stories:
+            result[story['current_state']] += int(story.get('estimate', 0))
+        return result
 
     def update(self):
         url = self.url_builder('/projects/{id}', {'id': self.project_id})

@@ -29,7 +29,10 @@ def test_headers(service):
     'return_value.status_code': 200,
     'return_value.json.return_value': {
         'velocity': 10,
-        'stories': [{'current_state': 'foo'}, {'current_state': 'foo'}],
+        'stories': [
+            {'current_state': 'foo', 'estimate': 5},
+            {'current_state': 'foo'},
+        ],
     },
 })
 def test_get_velocity_success(get, service):
@@ -40,7 +43,7 @@ def test_get_velocity_success(get, service):
          'iterations/456?fields=:default,velocity,stories'),
         headers={'X-TrackerToken': 'foobar'},
     )
-    assert result == {'velocity': 10, 'stories': {'foo': 2}}
+    assert result == {'velocity': 10, 'stories': {'foo': 5}}
 
 
 @mock.patch('flash.services.tracker.logger.debug')
