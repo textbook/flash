@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block body %}<main>
+  <div class="dashboard">
+    <div class="service-tile tile-error">
+      <div class="service-caption">
+        <div class="service-name">Continuous Integration Error</div>
+        <div class="project-name">some/service</div>
+      </div>
+      <section class="pane short-pane">
+        <div class="pane-item build-outcome working">
+          <div class="message">Truncate to 20 ch...</div>
+          <div class="elapsed"></div>
+          <div class="author">Some Author</div>
+        </div>
+        <div class="pane-item build-outcome failed">
+          <div class="message">Truncate to 20 ch...</div>
+          <div class="elapsed"></div>
+          <div class="author">Some Author</div>
+        </div>
+        <div class="pane-item build-outcome cancelled">
+          <div class="message">Truncate to 20 ch...</div>
+          <div class="elapsed"></div>
+          <div class="author">Some Author</div>
+        </div>
+        <div class="pane-item build-outcome passed">
+          <div class="message">Truncate to 20 ch...</div>
+          <div class="elapsed"></div>
+          <div class="author">Some Author</div>
+        </div>
+      </section>
+    </div>
+    <div class="service-tile tile-ok">
+      <div class="service-caption">
+        <div class="service-name">Continuous Integration OK</div>
+        <div class="project-name">some/service</div>
+      </div>
+      <section class="pane short-pane">
+        <div class="pane-item build-outcome working">
+          <div class="message">Working</div>
+          <div class="elapsed">took some time</div>
+          <div class="author"></div>
+        </div>
+        <div class="pane-item build-outcome failed">
+          <div class="message">Failed</div>
+          <div class="elapsed">took some time</div>
+          <div class="author"></div>
+        </div>
+        <div class="pane-item build-outcome cancelled">
+          <div class="message">Cancelled</div>
+          <div class="elapsed">took some time</div>
+          <div class="author"></div>
+        </div>
+        <div class="pane-item build-outcome passed">
+          <div class="message">Passed</div>
+          <div class="elapsed">took some time</div>
+          <div class="author"></div>
+        </div>
+      </section>
+    </div>
+    <div class="service-tile">
+      <div class="service-caption">
+        <div class="service-name">Continuous Integration Neutral</div>
+        <div class="project-name">some/service</div>
+      </div>
+      <section class="pane short-pane">
+        <div class="pane-item build-outcome working">
+          <div class="message">Working</div>
+          <div class="elapsed">took some time</div>
+          <div class="author"></div>
+        </div>
+        <div class="pane-item build-outcome cancelled">
+          <div class="message">Cancelled</div>
+          <div class="elapsed">took some time</div>
+          <div class="author"></div>
+        </div>
+        <div class="pane-item build-outcome crashed">
+          <div class="message">Crashed</div>
+          <div class="elapsed">took some time</div>
+          <div class="author"></div>
+        </div>
+        <div class="pane-item build-outcome passed">
+          <div class="message">Passed</div>
+          <div class="elapsed">took some time</div>
+          <div class="author"></div>
+        </div>
+      </section>
+    </div>
+    <div class="service-tile">
+      <div class="service-caption">
+        <div class="service-name">General</div>
+        <div class="project-name">commit/else</div>
+      </div>
+      <section class="pane short-pane">
+        <div class="pane-item commit">
+          <div class="message">Commit</div>
+          <div class="committed"></div>
+          <div class="author">username</div>
+        </div>
+        <div class="pane-item commit">
+          <div class="message">Commit</div>
+          <div class="committed"></div>
+          <div class="author">username</div>
+        </div>
+        <div class="pane-item">
+          <span class="item-title">True: </span>
+          <span class="completed">1</span>
+        </div>
+        <div class="pane-item">
+          <span class="item-title">False: </span>
+          <span class="accepted">0</span>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>{% endblock %}

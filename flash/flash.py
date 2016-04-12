@@ -60,6 +60,12 @@ def home():
     return render_template('home.html', config=CONFIG, title='Flash')
 
 
+@app.route('/scratchpad')
+def scratchpad():
+    """Dummy page for styling tests."""
+    return render_template('demo.html', title='Style Scratchpad')
+
+
 @app.route('/_services')
 def services():
     """AJAX route for accessing services."""
