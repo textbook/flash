@@ -4,7 +4,7 @@ import logging
 from datetime import datetime, date, timedelta
 from os import getenv, path
 
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template
 
 from flash.services import define_services
 
@@ -69,8 +69,10 @@ def scratchpad():
 @app.route('/_services')
 def services():
     """AJAX route for accessing services."""
-    name = request.args.get('name', '', type=str).lower()
-    return jsonify(update_service(name, CONFIG['services']))
+    service_map = CONFIG['services']
+    return jsonify(
+        {name: update_service(name, service_map) for name in service_map}
+    )
 
 
 def update_service(name, service_map):
@@ -86,10 +88,12 @@ def update_service(name, service_map):
 
     """
     if name in service_map:
-        data = service_map[name].update()
+        service = service_map[name]
+        data = service.update()
         if not data:
             logger.warning('no data received for service: %s', name)
         else:
+            data['service_name'] = service.service_name
             CACHE[name] = dict(data=data, updated=datetime.now())
     else:
         logger.warning('service not found: %s', name)

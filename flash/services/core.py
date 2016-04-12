@@ -16,8 +16,8 @@ class Service(metaclass=ABCMeta):
     """:py:class:`str`: The name of the template to render."""
 
     @abstractmethod
-    def __init__(self, *_, **__):
-        pass
+    def __init__(self, *_, **kwargs):
+        self.service_name = kwargs.get('name')
 
     @abstractmethod
     def update(self):
@@ -62,4 +62,5 @@ class Service(metaclass=ABCMeta):
             raise TypeError('missing required config keys: {!s}'.format(
                 ', '.join(missing)
             ))
-        return cls(**config)
+        instance = cls(**config)
+        return instance

@@ -1,4 +1,4 @@
-<div id="travis-service" class="service-tile">
+<div id="{{ service_id }}" class="service-tile">
   <div class="service-caption">
     <div class="service-name">Travis CI</div>
     <div class="project-name"></div>
@@ -8,5 +8,4 @@
       {% include 'partials/outcome.html' %}
     {% endfor %}
   </section>
-  <script src="{{ url_for('static', filename='scripts/travis.js') }}"></script>
 </div>

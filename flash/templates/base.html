@@ -7,8 +7,8 @@
       src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
   <script src="{{ url_for('static', filename='scripts/utils.js') }}"></script>
   <script>
-    $MINUTE = 1000 * 60;
-    $SERVICES = {{ url_for('services') | tojson | safe }};
+    $SERVICE_URL = {{ url_for('services') | tojson | safe }};
+    $SERVICES = {};
     window.jQuery || document.write('<script src="{{
         url_for('static', filename='scripts/jquery-2.2.2.min.js')
     }}">\x3C/script>');

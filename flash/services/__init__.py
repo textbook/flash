@@ -1,6 +1,7 @@
 """Defines the services that can be shown on the dashboard."""
 
 from collections import OrderedDict
+from uuid import uuid4
 
 from .codeship import Codeship
 from .github import GitHub
@@ -34,7 +35,5 @@ def define_services(config):
         name = settings['name']
         if name not in SERVICES:
             raise ValueError('unknown service {!r}'.format(name))
-        if name in services:
-            raise ValueError('duplicate service {!r}'.format(name))
-        services[name] = SERVICES[name].from_config(**settings)
+        services[uuid4().hex] = SERVICES[name].from_config(**settings)
     return services

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block body %}<main>
   <div class="dashboard">
-    {% for service in config.services.values() %}
+    {% for service_id, service in config.services.items() %}
       {% set template = 'partials/{}.html'.format(service.TEMPLATE) %}
       {% include template %}
     {% endfor %}
