@@ -1,4 +1,4 @@
-/* globals $SERVICE_URL */
+/* globals $,$SERVICE_URL */
 
 var SERVICES = {
   codeship: function (pane, data) {
@@ -26,10 +26,6 @@ var SERVICES = {
       updateItems(pane, data.builds, '.build-outcome', updateOutcome);
     }
   }
-};
-
-var register = function (serviceName, handler) {
-  SERVICES[serviceName] = handler;
 };
 
 var updateCommit = function(element, data) {
