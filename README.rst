@@ -72,10 +72,13 @@ The easiest way to install Flash for development is:
 4. To run the tests, use ``python setup.py test`` or run ``py.test``; the latter
    allows you to add flags such as ``--runslow`` (to include the integration
    tests) or ``--pytest-pylint`` (to lint the package before testing).
+   
+The templates are written using the `Jinja2`_ template language.
 
 
 .. _Codeship: https://codeship.com/
 .. _Flask: http://flask.pocoo.org/
+.. _Jinja2: http://jinja.pocoo.org/docs/dev/
 .. _GitHub: https://github.com/
 .. _Pivotal Tracker: https://www.pivotaltracker.com/
 .. _Travis CI: https://travis-ci.org/
