@@ -8,17 +8,11 @@
       <span class="item-title">Velocity: </span>
       <span class="velocity"></span>
     </div>
-    <div class="pane-item">
-      <span class="item-title">In flight: </span>
-      <span class="in-flight"></span>
-    </div>
-    <div class="pane-item">
-      <span class="item-title">Completed: </span>
-      <span class="completed"></span>
-    </div>
-    <div class="pane-item">
-      <span class="item-title">Accepted: </span>
-      <span class="accepted"></span>
-    </div>
+    {% for category in ['ready', 'in-flight', 'completed', 'accepted'] %}
+      <div class="pane-item">
+        <span class="item-title">{{ category | capitalize | replace('-', ' ') }}: </span>
+        <span class="{{ category }}"></span>
+      </div>
+    {% endfor %}
   </section>
 </div>
