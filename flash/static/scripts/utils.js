@@ -14,7 +14,7 @@ var SERVICES = {
   tracker: function (pane, data) {
     if (data.velocity) { pane.find('.velocity').text(data.velocity); }
     if (data.stories) {
-      pane.find('.ready').text(data.stories.planned || 0);
+      pane.find('.ready').text(data.stories.planned + data.stories.unstarted || 0);
       pane.find('.accepted').text(data.stories.accepted || 0);
       pane.find('.in-flight').text(data.stories.started || 0);
       pane.find('.completed').text(
