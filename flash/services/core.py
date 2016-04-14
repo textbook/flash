@@ -95,4 +95,7 @@ class Service(metaclass=ABCMeta):
         finish = current['started_at'] + average_duration
         remaining = (datetime.fromtimestamp(finish) -
                      datetime.now()).total_seconds()
-        current['elapsed'] = '{} left'.format(naturaldelta(remaining))
+        if remaining >= 0:
+            current['elapsed'] = '{} left'.format(naturaldelta(remaining))
+        else:
+            current['elapsed'] = 'nearly done'

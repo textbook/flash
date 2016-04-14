@@ -83,3 +83,14 @@ def test_build_estimate_usable():
     assert current['elapsed'] == 'ten minutes left'
 
 
+def test_build_estimate_negative():
+    current = {'started_at': int(datetime.now().timestamp())}
+    previous = [
+        {'outcome': 'passed', 'duration': -5},
+        {'outcome': 'passed', 'duration': -10},
+        {'outcome': 'passed', 'duration': 0},
+    ]
+
+    Service.estimate_time(current, previous)
+
+    assert current['elapsed'] == 'nearly done'
