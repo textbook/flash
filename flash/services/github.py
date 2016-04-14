@@ -43,6 +43,7 @@ class GitHub(UrlParamMixin, Service):
 
     @property
     def name(self):
+        """The full name of the repo, including branch if provided."""
         if self.branch:
             return '{} [{}]'.format(self.repo, self.branch)
         return self.repo

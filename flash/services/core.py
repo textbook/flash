@@ -70,6 +70,16 @@ class Service(metaclass=ABCMeta):
 
     @staticmethod
     def estimate_time(current, previous):
+        """Update the current build with an estimated completion time.
+
+        Takes a simple average over the previous builds, using those
+        whose outcome is ``'passed'``.
+
+        Arguments:
+          current (:py:class:`dict`): The current build data.
+          previous (:py:class:`list`): All previous builds.
+
+        """
         if current.get('started_at') is None:
             current['elapsed'] = 'estimate not available'
             return
