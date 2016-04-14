@@ -57,11 +57,11 @@ class Codeship(UrlParamMixin, Service):
           :py:class:`dict`: The re-formatted data.
 
         """
-        builds = [
-            cls.format_build(build) for build in data.get('builds', [])[:5]
-        ]
+        builds = [cls.format_build(build) for build in data.get('builds', [])]
+        if builds and builds[0]['outcome'] == 'working':
+            cls.estimate_time(builds[0], builds[1:])
         return dict(
-            builds=builds,
+            builds=builds[:4],
             health=health_summary(builds),
             name=data.get('repository_name'),
         )
@@ -80,12 +80,17 @@ class Codeship(UrlParamMixin, Service):
         status = build.get('status')
         if status not in cls.OUTCOMES:
             logger.warning('unknown status: %s', status)
+        start, finish, elapsed = elapsed_time(
+            build.get('started_at'),
+            build.get('finished_at'),
+        )
         return dict(
             author=build.get('github_username'),
-            elapsed=elapsed_time(
-                build.get('started_at'),
-                build.get('finished_at'),
+            duration=(
+                None if start is None or finish is None else finish - start
             ),
+            elapsed=elapsed,
             message=truncate(build.get('message')),
             outcome=cls.OUTCOMES.get(status),
+            started_at=start,
         )

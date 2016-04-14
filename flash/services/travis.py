@@ -5,7 +5,7 @@ import logging
 import requests
 
 from .core import Service
-from .utils import health_summary, naturaldelta, truncate
+from .utils import elapsed_time, health_summary, truncate
 
 logger = logging.getLogger(__name__)
 
@@ -74,10 +74,12 @@ class TravisOS(Service):
         commits = {commit['id']: commit for commit in data.get('commits', [])}
         builds = [
             self.format_build(build, commits.get(build.get('commit_id'), {}))
-            for build in data.get('builds', [])[:5]
+            for build in data.get('builds', [])
         ]
+        if builds and builds[0]['outcome'] == 'working':
+            self.estimate_time(builds[0], builds[1:])
         return dict(
-            builds=builds,
+            builds=builds[:4],
             health=health_summary(builds),
             name=self.repo,
         )
@@ -97,14 +99,17 @@ class TravisOS(Service):
         status = build.get('state')
         if status not in cls.OUTCOMES:
             logger.warning('unknown status: %s', status)
-        try:
-            elapsed = 'took {}'.format(naturaldelta(int(build.get('duration'))))
-        except (TypeError, ValueError):
-            logger.exception('failed to generate elapsed time')
-            elapsed = 'elapsed time not available'
+        start, finish, elapsed = elapsed_time(
+            build.get('started_at'),
+            build.get('finished_at'),
+        )
         return dict(
             author=commit.get('author_name'),
+            duration=(
+                None if start is None or finish is None else finish - start
+            ),
             elapsed=elapsed,
             message=truncate(commit.get('message', '')),
             outcome=cls.OUTCOMES.get(status),
+            started_at=start,
         )

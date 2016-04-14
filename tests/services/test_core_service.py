@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from datetime import datetime
 
 import pytest
 
@@ -51,3 +52,34 @@ def test_required_config(config):
 ])
 def test_url_builder(input_,expected):
     assert Test().url_builder(*input_) == expected
+
+
+def test_build_estimate_unstarted():
+    current = {'started_at': None}
+
+    Service.estimate_time(current, [])
+
+    assert current['elapsed'] == 'estimate not available'
+
+
+def test_build_estimate_no_history():
+    current = {'started_at': 123456789}
+
+    Service.estimate_time(current, [])
+
+    assert current['elapsed'] == 'estimate not available'
+
+
+def test_build_estimate_usable():
+    current = {'started_at': int(datetime.now().timestamp())}
+    previous = [
+        {'outcome': 'passed', 'duration': 610},
+        {'outcome': 'passed', 'duration': 600},
+        {'outcome': 'passed', 'duration': 605},
+    ]
+
+    Service.estimate_time(current, previous)
+
+    assert current['elapsed'] == 'ten minutes left'
+
+

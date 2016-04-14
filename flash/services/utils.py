@@ -73,14 +73,56 @@ def elapsed_time(start, end):
       end (:py:class:`str`): The activity end time.
 
     Returns:
-      :py:class:`str`: The humanized elapsed time.
+      :py:class:`tuple`: The start and end times and humanized elapsed
+        time.
 
     """
-    try:
-        return 'took {}'.format(naturaldelta(parse(end) - parse(start)))
-    except (AttributeError, ValueError):
+    start_time = safe_parse(start)
+    end_time = safe_parse(end)
+    if start_time is None or end_time is None:
         logger.exception('failed to generate elapsed time')
-    return 'elapsed time not available'
+        text = 'elapsed time not available'
+    else:
+        text = 'took {}'.format(naturaldelta(parse(end) - parse(start)))
+    return to_utc_timestamp(start_time), to_utc_timestamp(end_time), text
+
+
+def to_utc_timestamp(date_time):
+    """Convert a naive or timezone-aware datetime to UTC timestamp.
+
+    Arguments:
+      date_time (:py:class:`datetime.datetime`): The datetime to
+        convert.
+
+    Returns:
+      :py:class:`int`: The timestamp (in seconds).
+
+    """
+    if date_time is None:
+        return
+    if date_time.tzname is None:
+        timestamp = date_time.replace(tzinfo=timezone.utc).timestamp()
+    else:
+        timestamp = date_time.timestamp()
+    return int(round(timestamp, 0))
+
+
+def safe_parse(time):
+    """Parse a string without throwing an error.
+
+    Arguments:
+      time (:py:class:`str`): The string to parse.
+
+    Returns:
+      :py:class:`datetime.datetime`: The parsed datetime.
+
+    """
+    if time is None:
+        return
+    try:
+        return parse(time)
+    except (OverflowError, ValueError):
+        pass
 
 
 def occurred(at_):

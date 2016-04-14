@@ -1,6 +1,9 @@
 """Core service description."""
 
 from abc import ABCMeta, abstractmethod
+from datetime import datetime
+
+from .utils import naturaldelta
 
 
 class Service(metaclass=ABCMeta):
@@ -64,3 +67,22 @@ class Service(metaclass=ABCMeta):
             ))
         instance = cls(**config)
         return instance
+
+    @staticmethod
+    def estimate_time(current, previous):
+        if current.get('started_at') is None:
+            current['elapsed'] = 'estimate not available'
+            return
+        usable = [
+            build for build in previous if build['outcome'] == 'passed' and
+            build['duration'] is not None
+        ]
+        if not usable:
+            current['elapsed'] = 'estimate not available'
+            return
+        average_duration = int(sum(build['duration'] for build in usable) /
+                               float(len(usable)))
+        finish = current['started_at'] + average_duration
+        remaining = (datetime.fromtimestamp(finish) -
+                     datetime.now()).total_seconds()
+        current['elapsed'] = '{} left'.format(naturaldelta(remaining))

@@ -69,9 +69,11 @@ def test_formatting():
         name='foo',
         builds=[dict(
             author='textbook',
+            duration=363,
             elapsed='took six minutes',
             message='hello world',
             outcome='passed',
+            started_at=1459551843,
         )],
         health='ok',
     )
@@ -96,9 +98,11 @@ def test_unfinished_formatting(warning):
         name='foo',
         builds=[dict(
             author='textbook',
+            duration=None,
             elapsed='elapsed time not available',
             message='some much longer...',
             outcome=None,
+            started_at=1459551843,
         )],
         health='neutral',
     )

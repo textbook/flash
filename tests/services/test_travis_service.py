@@ -65,7 +65,8 @@ def test_formatting(service):
     response = dict(
         builds=[dict(
             commit_id=123456,
-            duration=567,
+            finished_at='2016-04-14T20:57:07Z',
+            started_at='2016-04-14T20:47:40Z',
             state='passed',
         )],
         commits=[dict(
@@ -81,9 +82,11 @@ def test_formatting(service):
         name='foo/bar',
         builds=[dict(
             author='alice',
+            duration=567,
             elapsed='took nine minutes',
             message='hello world',
             outcome='passed',
+            started_at=1460666860,
         )],
         health='ok',
     )
@@ -109,9 +112,11 @@ def test_unfinished_formatting(warning, service):
         name='foo/bar',
         builds=[dict(
             author='alice',
+            duration=None,
             elapsed='elapsed time not available',
             message='some much longer...',
             outcome=None,
+            started_at=None,
         )],
         health='neutral',
     )

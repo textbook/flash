@@ -33,10 +33,22 @@ def test_occurred(exception, input_, expected, logged):
 
 
 @pytest.mark.parametrize('input_, expected, logged', [
-    ((None, None), 'elapsed time not available', True),
-    (('2011-12-13T14:15:16', None), 'elapsed time not available', True),
-    ((None, '2011-12-13T14:15:16'), 'elapsed time not available', True),
-    (('2011-12-11T02:15:16', '2011-12-13T14:15:16'), 'took two days', False),
+    ((None, None), (None, None, 'elapsed time not available'), True),
+    (
+        ('2011-12-13T14:15:16', None),
+        (1323785716, None, 'elapsed time not available'),
+        True,
+    ),
+    (
+        (None, '2011-12-13T14:15:16'),
+        (None, 1323785716, 'elapsed time not available'),
+        True,
+    ),
+    (
+        ('2011-12-11T02:15:16', '2011-12-13T14:15:16'),
+        (1323569716, 1323785716, 'took two days'),
+        False,
+    ),
 ])
 @mock.patch('flash.services.utils.logger.exception')
 def test_elapsed_time(exception, input_, expected, logged):
