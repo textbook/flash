@@ -40,22 +40,30 @@ The configuration, either saved in ``config.json`` at the project root or as the
       ]
     }
 
-The current supported service names are:
+* ``github`` - for project repositories on `GitHub`_
 
-* ``github`` - for project repositories on `GitHub`_ (requires ``api_token``,
-  ``account`` (the name of the account the project is in, e.g. ``"textbook"``)
-  and ``app`` (the name of the project application within that account, e.g.
-  ``"flash"``)).
+  * ``api_token`` (required),
+  * ``account`` (required - the name of the account the project is in, e.g.
+  ``"textbook"``)
+  * ``app`` (required - the name of the project application within that account,
+  e.g. ``"flash"``)
+  * ``branch`` (the name of the branch to show commits from, defaulting to the
+  repository's default branch, which is usually ``master``).
 
-* ``codeship`` - for CI builds on `Codeship`_ (requires ``api_token`` and
-  ``project_id``).
+* ``codeship`` - for CI builds on `Codeship`_
 
-* ``tracker`` - for projects on `Pivotal Tracker`_ (requires ``api_token`` and
-  ``project_id``).
+  * ``api_token`` (required)
+  * ``project_id`` (required)
 
-* ``travis`` - for CI builds on `Travis CI`_ (requires ``app`` and ``account``,
-  currently only supports open-source builds on the ``.org`` site).
+* ``tracker`` - for projects on `Pivotal Tracker`_
 
+  * ``api_token`` (required)
+  * ``project_id`` (required)
+
+* ``travis`` - for CI builds on `Travis CI`_ (currently only supports open-source builds on the ``.org`` site).
+
+  * ``account`` (required)
+  * ``app`` (required)
 
 Running it
 ----------

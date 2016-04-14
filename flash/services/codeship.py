@@ -39,7 +39,7 @@ class Codeship(UrlParamMixin, Service):
     def update(self):
         logger.debug('fetching Codeship project data')
         response = requests.get(
-            self._url_builder('/projects/{id}.json', {'id': self.project_id})
+            self.url_builder('/projects/{id}.json', {'id': self.project_id})
         )
         if response.status_code == 200:
             return self.format_data(response.json())

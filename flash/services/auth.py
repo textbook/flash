@@ -1,6 +1,8 @@
 """Mix-in classes for implementing service authentication."""
 # pylint: disable=too-few-public-methods
 
+from collections import OrderedDict
+
 
 class TokenAuthMixin:
     """Mix-in class for implementing token authentication."""
@@ -19,10 +21,10 @@ class UrlParamMixin(TokenAuthMixin):
 
     """
 
-    def _url_builder(self, endpoint, params=None, url_params=None):
+    def url_builder(self, endpoint, params=None, url_params=None):
         """Add authentication URL parameter."""
         if url_params is None:
-            url_params = {}
+            url_params = OrderedDict()
         url_params[self.AUTH_PARAM] = self.api_token
         return super().url_builder(endpoint, params, url_params)
 

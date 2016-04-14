@@ -1,6 +1,7 @@
 """Defines the GitHub service integration."""
 
 import logging
+from collections import OrderedDict
 
 import requests
 
@@ -19,6 +20,8 @@ class GitHub(UrlParamMixin, Service):
       api_token (:py:class:`str`): A valid token for the GitHub API.
       account (:py:class:`str`): The name of the account.
       app (:py:class:`str`): The name of the application.
+      branch (:py:class:`str`, optional): The branch to get commit data
+        from.
 
     Attributes:
       repo (:py:class:`str`): The repository name, in the format
@@ -31,11 +34,18 @@ class GitHub(UrlParamMixin, Service):
     ROOT = 'https://api.github.com'
     TEMPLATE = 'github'
 
-    def __init__(self, *, api_token, account, app, **kwargs):
+    def __init__(self, *, api_token, account, app, branch=None, **kwargs):
         super().__init__(api_token=api_token, **kwargs)
         self.account = account
         self.app = app
+        self.branch = branch
         self.repo = '{}/{}'.format(account, app)
+
+    @property
+    def name(self):
+        if self.branch:
+            return '{} [{}]'.format(self.repo, self.branch)
+        return self.repo
 
     @property
     def headers(self):
@@ -46,11 +56,15 @@ class GitHub(UrlParamMixin, Service):
     def update(self):
         logger.debug('fetching GitHub project data')
         response = requests.get(
-            self._url_builder('/repos/{repo}/commits', {'repo': self.repo}),
+            self.url_builder(
+                '/repos/{repo}/commits',
+                {'repo': self.repo},
+                OrderedDict(sha=self.branch) if self.branch else OrderedDict(),
+            ),
             headers=self.headers,
         )
         if response.status_code == 200:
-            return self.format_data(self.repo, response.json())
+            return self.format_data(self.name, response.json())
         logger.error('failed to update GitHub project data')
         return {}
 

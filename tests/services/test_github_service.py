@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from datetime import datetime, timedelta
 from unittest import mock
 
@@ -7,9 +8,14 @@ from flash.services.core import Service
 from flash.services.github import GitHub
 
 
-@pytest.fixture()
+@pytest.fixture
 def service():
     return GitHub(api_token='foobar', account='foo', app='bar')
+
+
+@pytest.fixture
+def branched():
+    return GitHub(api_token='foobar', account='foo', app='bar', branch='baz')
 
 
 def test_tracker_service_type():
@@ -100,3 +106,16 @@ def test_update_failure(get, error, service):
 ])
 def test_format_commit(input_, expected):
     assert GitHub.format_commit(input_) == expected
+
+
+@mock.patch('flash.services.github.requests.get', **{
+    'return_value.status_code': 302,
+})
+def test_branch_url(get, branched):
+    branched.update()
+
+    get.assert_called_once_with(
+        'https://api.github.com/repos/foo/bar/commits'
+        '?sha=baz&access_token=foobar',
+        headers={'User-Agent': 'bar'},
+    )
