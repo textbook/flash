@@ -44,11 +44,11 @@ The configuration, either saved in ``config.json`` at the project root or as the
 
   * ``api_token`` (required),
   * ``account`` (required - the name of the account the project is in, e.g.
-  ``"textbook"``)
+    ``"textbook"``)
   * ``app`` (required - the name of the project application within that account,
-  e.g. ``"flash"``)
+    e.g. ``"flash"``)
   * ``branch`` (the name of the branch to show commits from, defaulting to the
-  repository's default branch, which is usually ``master``).
+    repository's default branch, which is usually ``master``).
 
 * ``codeship`` - for CI builds on `Codeship`_
 
