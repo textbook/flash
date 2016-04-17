@@ -18,7 +18,7 @@ Flash
   :alt: Other Code Issues
 
 .. image:: https://img.shields.io/badge/license-ISC-blue.svg
-  :target: https://github.com/textbook/halliwell/blob/master/LICENSE
+  :target: https://github.com/textbook/flash/blob/master/LICENSE
   :alt: ISC License
 
 `Flask`_ + Dashboard = Flash. A project dashboard *that works*.
