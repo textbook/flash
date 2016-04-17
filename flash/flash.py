@@ -6,12 +6,13 @@ from os import getenv, path
 
 from flask import Flask, jsonify, render_template
 
-from flash.services import define_services
+from flash_services import blueprint, define_services
 
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 app.secret_key = getenv('FLASK_SECRET_KEY', 'youwillneverguessit')
+app.register_blueprint(blueprint)
 
 CACHE = {}
 

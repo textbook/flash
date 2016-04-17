@@ -45,37 +45,10 @@ Settings
 
 * ``project_name`` - the project's name to display in the footer (defaults to
   ``"unnamed"``)
-* ``services`` - an array of service configurations (see below)
+* ``services`` - an array of service configurations (see `flash_services`_ for
+  details and configuration options)
 * ``style`` - the stylesheet to use (defaults to ``"default"``, which is
   currently the only option...)
-
-Available services
-==================
-
-* ``github`` - for project repositories on `GitHub`_
-
-  * ``api_token`` (required),
-  * ``account`` (required - the name of the account the project is in, e.g.
-    ``"textbook"``)
-  * ``app`` (required - the name of the project application within that account,
-    e.g. ``"flash"``)
-  * ``branch`` (the name of the branch to show commits from, defaulting to the
-    repository's default branch, which is usually ``master``).
-
-* ``codeship`` - for CI builds on `Codeship`_
-
-  * ``api_token`` (required)
-  * ``project_id`` (required)
-
-* ``tracker`` - for projects on `Pivotal Tracker`_
-
-  * ``api_token`` (required)
-  * ``project_id`` (required)
-
-* ``travis`` - for CI builds on `Travis CI`_ (currently only supports open-source builds on the ``.org`` site).
-
-  * ``account`` (required)
-  * ``app`` (required)
 
 Running it
 ----------
@@ -95,9 +68,9 @@ The easiest way to install Flash for development is:
    
 The templates are written using the `Jinja2`_ template language.
 
-
 .. _Codeship: https://codeship.com/
 .. _Flask: http://flask.pocoo.org/
+.. _flash_services: https://github.com/textbook/flash_services
 .. _Jinja2: http://jinja.pocoo.org/docs/dev/
 .. _GitHub: https://github.com/
 .. _Pivotal Tracker: https://www.pivotaltracker.com/

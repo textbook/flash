@@ -1,6 +1,7 @@
 astroid==1.4.4
 colorama==0.3.7
 cookies==2.2.1
+flash-services==0.1.2
 Flask==0.10.1
 Flask-Humanize==0.3.0
 humanize==0.5.1
@@ -21,5 +22,5 @@ requests==2.9.1
 responses==0.5.1
 selenium==2.53.1
 six==1.10.0
-Werkzeug==0.11.4
+Werkzeug==0.11.8
 wrapt==1.10.6
