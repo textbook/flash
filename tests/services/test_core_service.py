@@ -18,11 +18,6 @@ class Test(Service):
         pass
 
 
-def test_core_is_abstract():
-    with pytest.raises(TypeError):
-        Service()
-
-
 @pytest.mark.parametrize('config', [
     ({},),
     ({'foo': None},),
