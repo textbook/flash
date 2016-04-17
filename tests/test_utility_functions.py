@@ -12,7 +12,12 @@ CONFIG_STRING = '{"name":"foo","services":[]}'
 def test_parse_config_from_env(logger, getenv, define_services):
     result = parse_config()
 
-    assert result == {'name': 'foo', 'services': define_services.return_value}
+    assert result == {
+        'name': 'foo',
+        'project_name': 'unnamed',
+        'services': define_services.return_value,
+        'style': 'default',
+    }
     getenv.assert_called_once_with('FLASH_CONFIG')
     logger.info.assert_called_once_with(
         'loading configuration from environment',
@@ -27,7 +32,12 @@ def test_parse_config_from_env(logger, getenv, define_services):
 def test_parse_config_from_file(logger, getenv, define_services):
     result = parse_config()
 
-    assert result == {'name': 'foo', 'services': define_services.return_value}
+    assert result == {
+        'name': 'foo',
+        'project_name': 'unnamed',
+        'services': define_services.return_value,
+        'style': 'default',
+    }
     getenv.assert_called_once_with('FLASH_CONFIG')
     logger.info.assert_called_once_with('loading configuration from file')
     define_services.assert_called_once_with([])

@@ -37,7 +37,7 @@ def define_services(config):
     for settings in config:
         name = settings['name']
         if name not in SERVICES:
-            logger.warning('unknown service {!r}'.format(name))
+            logger.warning('unknown service %r', name)
             continue
         services[uuid4().hex] = SERVICES[name].from_config(**settings)
     return services
