@@ -47,7 +47,9 @@ def parse_config():
         )
         with open(file_name) as config_file:
             data = json.load(config_file)
-    data['services'] = define_services(data['services'])
+    data['project_name'] = data.get('project_name', 'unnamed')
+    data['services'] = define_services(data.get('services', []))
+    data['style'] = data.get('style', 'default')
     return data
 
 

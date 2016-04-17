@@ -13,7 +13,8 @@
         url_for('static', filename='scripts/jquery-2.2.2.min.js')
     }}">\x3C/script>');
   </script>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  {% set stylesheet = 'styles/{}.css'.format(config.style) %}
+  <link rel="stylesheet" href="{{ url_for('static', filename=stylesheet) }}">
 </head>
 <body>
 {% block body %}{% endblock %}
