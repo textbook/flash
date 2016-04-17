@@ -45,6 +45,7 @@ Settings
 
 * ``project_name`` - the project's name to display in the footer (defaults to
   ``"unnamed"``)
+* ``services`` - an array of service configurations (see below)
 * ``style`` - the stylesheet to use (defaults to ``"default"``, which is
   currently the only option...)
 
