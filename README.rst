@@ -43,10 +43,10 @@ The configuration, either saved in ``config.json`` at the project root or as the
 Settings
 ========
 
- * ``project_name`` - the project's name to display in the footer (defaults to
-   ``"unnamed"``)
- * ``style`` - the stylesheet to use (defaults to ``"default"``, which is
-   currently the only option)
+* ``project_name`` - the project's name to display in the footer (defaults to
+  ``"unnamed"``)
+* ``style`` - the stylesheet to use (defaults to ``"default"``, which is
+  currently the only option...)
 
 Available services
 ==================
