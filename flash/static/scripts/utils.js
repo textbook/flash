@@ -88,8 +88,45 @@ var updateServices = function() {
   });
 };
 
+/**
+* This can be wrapped up in a jquery plugin.
+* The current visual feedback is not great and will be improved.
+*/
+var bundleService = function (serviceSelector, interval) {
+  var active = 0;
+  var stacked = []
+  var wrapper = bundle(serviceSelector);
+
+  function bundle(selector) {
+    var tiles = $(selector).remove();
+    var wrapper = $('<div class="tiles-stack"></div>')
+
+    tiles.each(function (index, obj) {
+      stacked[index] = $(obj);
+      wrapper.append(stacked[index]);
+    });
+    $('.dashboard').append(wrapper);
+
+    return wrapper;
+  }
+
+  function updateStacked() {
+    var currentActive = active++ % stacked.length;
+    wrapper.children().hide();
+
+    stacked[currentActive]
+      .show()
+      .effect('shake', {distance: 10, times: 1});
+  }
+
+  updateStacked();
+  setInterval(updateStacked, interval)
+}
+
 $(document).ready(function () {
+  // TODO: find all services that have multiple tiles registered.
+  bundleService('.tracker', 15000);
+
   updateServices();
   setInterval(updateServices, 60000);
 });
-
