@@ -1,12 +1,15 @@
 """Defines the services that can be shown on the dashboard."""
 
 from collections import OrderedDict
+import logging
 from uuid import uuid4
 
 from .codeship import Codeship
 from .github import GitHub
 from .tracker import Tracker
 from .travis import TravisOS
+
+logger = logging.getLogger(__name__)
 
 SERVICES = dict(
     codeship=Codeship,
@@ -34,6 +37,7 @@ def define_services(config):
     for settings in config:
         name = settings['name']
         if name not in SERVICES:
-            raise ValueError('unknown service {!r}'.format(name))
+            logger.warning('unknown service {!r}'.format(name))
+            continue
         services[uuid4().hex] = SERVICES[name].from_config(**settings)
     return services
