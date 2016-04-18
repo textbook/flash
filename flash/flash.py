@@ -4,7 +4,7 @@ import logging
 from datetime import datetime, date, timedelta
 from os import getenv, path
 
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 
 from flash_services import blueprint, define_services
 
@@ -66,7 +66,11 @@ def home():
 @app.route('/scratchpad')
 def scratchpad():
     """Dummy page for styling tests."""
-    return render_template('demo.html', title='Style Scratchpad')
+    return render_template(
+        'demo.html',
+        config=dict(style=request.args.get('style', 'default')),
+        title='Style Scratchpad',
+    )
 
 
 @app.route('/_services')
