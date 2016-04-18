@@ -30,7 +30,7 @@ h1 {
 
 .service-tile.tile-error {
   border-left: 15px solid rgb(187, 52, 52);
-  -webkit-animation: failed-animation 5s infinite;
+  -webkit-animation: error-animation 5s infinite;
 }
 
 .service-name {
@@ -85,9 +85,6 @@ h1 {
 
 .build-outcome.working {
   background-color: rgb(52, 123, 52);
-}
-
-.build-outcome:first-child.working {
   -webkit-animation: working-animation 3s infinite;
 }
 
@@ -108,4 +105,8 @@ footer {
 
 @-webkit-keyframes working-animation {
   50%  {background: rgb(187, 52, 52);}
+}
+
+@-webkit-keyframes error-animation {
+  50% {background: rgb(73, 31, 31);}
 }
