@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 app.secret_key = getenv('FLASK_SECRET_KEY', 'youwillneverguessit')
-app.register_blueprint(blueprint)
+app.register_blueprint(blueprint, url_prefix='/flash_services')
 
 CACHE = {}
 
