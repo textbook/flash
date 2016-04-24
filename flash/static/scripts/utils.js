@@ -81,6 +81,7 @@ var bundleService = function (serviceSelector, interval) {
   }
 
   function updateStacked() {
+    if (stacked.length === 0) return;
     var currentActive = active++ % stacked.length;
     wrapper.children().hide();
 
