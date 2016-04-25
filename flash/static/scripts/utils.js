@@ -73,6 +73,7 @@ var bundleService = function (serviceSelector, interval) {
 
     tiles.each(function (index, obj) {
       stacked[index] = $(obj);
+      stacked[index].append('<div class="tiles-count">' + (index + 1) + ' of ' + tiles.length+ '</div>');
       wrapper.append(stacked[index]);
     });
     $('.dashboard').append(wrapper);
@@ -87,7 +88,7 @@ var bundleService = function (serviceSelector, interval) {
 
     stacked[currentActive]
       .show()
-      .effect('shake', {distance: 10, times: 1});
+      .effect('shake', {distance: 10, times: 3});
   }
 
   updateStacked();
