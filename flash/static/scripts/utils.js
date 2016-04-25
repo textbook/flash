@@ -58,8 +58,8 @@ var updateServices = function() {
 };
 
 /**
-* This can be wrapped up in a jquery plugin.
-* The current visual feedback is not great and will be improved.
+* bundleService puts tiles of the same kind into a wrapper element and animates the transition.
+* bundleService as well as bundleServices could be nicely encapsulated in a jquery plugin.
 */
 var bundleService = function (serviceSelector, interval) {
   console.log('bundle ', serviceSelector)
@@ -95,8 +95,35 @@ var bundleService = function (serviceSelector, interval) {
   setInterval(updateStacked, interval)
 }
 
+/**
+* bundleServices goes over all tiles and finds tiles of the same kind > 1
+* The order ot the tiles changes at the moment, tiles with more than one tile
+* are appended to the end.
+*/
+function bundleServices() {
+  var serviceTiles = $('.service-tile');
+  var cssClassTotals = {}
+
+  serviceTiles.each(function (index, obj) {
+    $(obj).attr('class').match(/.*-tile/)[0].split(/\s+/).forEach(function (cssClass) {
+      if (cssClass === 'service-tile') return;
+      if (!cssClassTotals[cssClass]) cssClassTotals[cssClass] = 0;
+      cssClassTotals[cssClass] += 1;
+    })
+  })
+
+  for (var cssClass in cssClassTotals) {
+    if (cssClassTotals.hasOwnProperty(cssClass)) {
+      if (cssClassTotals[cssClass] > 1) {
+        var cssSelector = '.' + cssClass;
+        bundleService(cssSelector, 10000);
+      }
+    }
+  }
+}
+
 $(document).ready(function () {
-  bundleService('.tracker-tile', 10000);
+  bundleServices();
   updateServices();
   setInterval(updateServices, 60000);
 });
