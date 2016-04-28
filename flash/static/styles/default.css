@@ -76,7 +76,7 @@ h1 {
   background-color: rgb(52, 123, 52);
 }
 
-.build-outcome.failed {
+.build-outcome.failed, .build-outcome.crashed {
   background-color: rgb(187, 52, 52);
 }
 
