@@ -59,9 +59,16 @@ h1 {
 .pane-item {
   background: rgb(66, 66, 66);
   border-radius: 5px;
+  flex-basis: 20%;
   flex-grow: 1;
   margin: 10px;
   padding: 10px;
+}
+
+.pane-item > div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .pane-item .message {
