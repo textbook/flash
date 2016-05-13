@@ -62,14 +62,14 @@ var updateServices = function() {
 * bundleService as well as bundleServices could be nicely encapsulated in a jquery plugin.
 */
 var bundleService = function (serviceSelector, interval) {
-  console.log('bundle ', serviceSelector)
+  console.log('bundle ', serviceSelector);
   var active = 0;
-  var stacked = []
+  var stacked = [];
   var wrapper = bundle(serviceSelector);
 
   function bundle(selector) {
     var tiles = $(selector).remove();
-    var wrapper = $('<div class="tiles-stack"></div>')
+    var wrapper = $('<div class="tiles-stack"></div>');
 
     tiles.each(function (index, obj) {
       stacked[index] = $(obj);
@@ -93,7 +93,7 @@ var bundleService = function (serviceSelector, interval) {
 
   updateStacked();
   setInterval(updateStacked, interval)
-}
+};
 
 /**
 * bundleServices goes over all tiles and finds tiles of the same kind > 1
@@ -110,7 +110,7 @@ function bundleServices() {
       if (!cssClassTotals[cssClass]) cssClassTotals[cssClass] = 0;
       cssClassTotals[cssClass] += 1;
     })
-  })
+  });
 
   for (var cssClass in cssClassTotals) {
     if (cssClassTotals.hasOwnProperty(cssClass)) {
