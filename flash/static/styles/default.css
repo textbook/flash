@@ -62,6 +62,7 @@ h1 {
   flex-basis: 20%;
   flex-grow: 1;
   margin: 10px;
+  min-width: 100px;
   padding: 10px;
 }
 
