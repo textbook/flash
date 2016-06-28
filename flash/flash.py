@@ -3,6 +3,7 @@ import json
 import logging
 from datetime import datetime, date, timedelta
 from os import getenv, path
+from sys import exit  # pylint: disable=redefined-builtin
 
 from flask import Flask, jsonify, render_template, request
 
@@ -46,8 +47,13 @@ def parse_config():
         file_name = path.join(
             path.abspath(path.dirname(__file__)), 'config.json'
         )
-        with open(file_name) as config_file:
-            data = json.load(config_file)
+        try:
+            with open(file_name) as config_file:
+                data = json.load(config_file)
+        except FileNotFoundError:
+            logger.error('no configuration available, set FLASH_CONFIG or '
+                         'provide config.json')
+            exit()
     data['project_name'] = data.get('project_name', 'unnamed')
     data['services'] = define_services(data.get('services', []))
     data['style'] = data.get('style', 'default')
