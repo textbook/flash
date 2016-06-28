@@ -43,6 +43,39 @@ def test_parse_config_from_file(logger, getenv, define_services):
     define_services.assert_called_once_with([])
 
 
+@mock.patch('flash.flash.open', mock.mock_open(read_data="""
+{
+  "project_name": "demo",
+  "services": [
+    {
+      "name": "tracker",
+      "api_token": "$TRACKER_API_TOKEN",
+      "project_id": "$TRACKER_PROJECT_ID"
+    }
+  ]
+}
+"""))
+@mock.patch('flash.flash.define_services')
+@mock.patch('flash.flash.getenv', side_effect=dict(
+    FLASH_CONFIG=None,
+    TRACKER_API_TOKEN='password',
+    TRACKER_PROJECT_ID='123',
+).get)
+def test_parse_config_env_vars(getenv, define_services):
+    result = parse_config()
+    define_services.assert_called_once_with([
+        dict(name='tracker', api_token='password', project_id='123')
+    ])
+    getenv.assert_has_calls(
+        [
+            mock.call('FLASH_CONFIG'),
+            mock.call('TRACKER_API_TOKEN', '$TRACKER_API_TOKEN'),
+            mock.call('TRACKER_PROJECT_ID', '$TRACKER_PROJECT_ID'),
+        ],
+        any_order=True  # dictionary ordering
+    )
+
+
 @mock.patch('flash.flash.logger')
 def test_update_service_not_found(logger):
     result = update_service('foo', {})

@@ -33,12 +33,18 @@ The configuration, either saved in ``config.json`` at the project root or as the
       "project_name": <name of the project>,
       "services": [
         {
-          "name": "tracker", 
+          "name": "tracker",
           "api_token": <your API token>,
           "project_id": <your project ID>
         }
       ]
     }
+
+If loading from ``config.json``, any value in the ``"services"`` settings that
+``$LOOKS_LIKE_THIS`` (leading ``$``, capital letters and underscores only) will
+be assumed to be an environment variable and retrieved accordingly. This lets
+you version control most of your configuration without leaking API tokens and
+other secrets.
 
 Settings
 ========
@@ -56,16 +62,18 @@ Running it
 The easiest way to install Flash for development is:
 
 1. Install the dependencies: ``pip3 install -r requirements.txt``
-        
+
 2. Install the package in development mode: ``python3 setup.py develop``
-        
-3. To run it locally, save a configuration as either ``config.json`` or
-   ``$FLASH_CONFIG`` then run: ``python3 scripts/launch.py``
-      
+
+3. To run it locally, edit ``flash/config.json`` or provide ``$FLASH_CONFIG``
+   then run: ``python3 scripts/launch.py``
+
 4. To run the tests, use ``python setup.py test`` or run ``py.test``; the latter
    allows you to add flags such as ``--runslow`` (to include the integration
-   tests) or ``--pytest-pylint`` (to lint the package before testing).
-   
+   tests) or ``--pytest-pylint`` (to lint the package before testing). For the
+   tests to run you must set the environment variables ``$TRACKER_API_TOKEN``
+   and ``$TRACKER_PROJECT_ID``.
+
 The templates are written using the `Jinja2`_ template language.
 
 .. _Codeship: https://codeship.com/

@@ -3,6 +3,7 @@ import json
 import logging
 from datetime import datetime, date, timedelta
 from os import getenv, path
+import re
 from sys import exit  # pylint: disable=redefined-builtin
 
 from flask import Flask, jsonify, render_template, request
@@ -43,20 +44,36 @@ def parse_config():
         logger.info('loading configuration from environment')
         data = json.loads(env)
     else:
-        logger.info('loading configuration from file')
-        file_name = path.join(
-            path.abspath(path.dirname(__file__)), 'config.json'
-        )
-        try:
-            with open(file_name) as config_file:
-                data = json.load(config_file)
-        except FileNotFoundError:
-            logger.error('no configuration available, set FLASH_CONFIG or '
-                         'provide config.json')
-            exit()
+        data = _parse_file()
     data['project_name'] = data.get('project_name', 'unnamed')
     data['services'] = define_services(data.get('services', []))
     data['style'] = data.get('style', 'default')
+    return data
+
+def _parse_file():
+    """Parse the config from a file.
+
+    Note:
+      Assumes any value that ``"$LOOKS_LIKE_THIS"`` in a service
+      definition refers to an environment variable, and attempts to get
+      it accordingly.
+
+    """
+    logger.info('loading configuration from file')
+    file_name = path.join(
+        path.abspath(path.dirname(path.dirname(__file__))), 'config.json'
+    )
+    try:
+        with open(file_name) as config_file:
+            data = json.load(config_file)
+    except FileNotFoundError:
+        logger.error('no configuration available, set FLASH_CONFIG or '
+                     'provide config.json')
+        exit()
+    for service in data.get('services', []):
+        for key, value in service.items():
+            if re.match(r'^\$[A-Z_]+$', value):
+                service[key] = getenv(value[1:], value)
     return data
 
 
