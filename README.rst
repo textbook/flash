@@ -56,8 +56,8 @@ Settings
 * ``style`` - the stylesheet to use (defaults to ``"default"``, which is
   currently the only option...)
 
-Running it
-----------
+Developing it
+-------------
 
 The easiest way to install Flash for development is:
 
@@ -75,6 +75,15 @@ The easiest way to install Flash for development is:
 
 The templates are written using the `Jinja2`_ template language.
 
+Deploying it
+------------
+
+Flash can easily be deployed to any `Cloud Foundry`_ environment. An example
+``manifest.yml`` is included with the project, showing how to configure the
+deployment with an app name and a random route. Once you have installed the CLI
+and selected an appropriate target org and space, you can simply ``cf push``.
+
+.. _Cloud Foundry: https://cloudfoundry.org/
 .. _Codeship: https://codeship.com/
 .. _Flask: http://flask.pocoo.org/
 .. _flash_services: https://github.com/textbook/flash_services

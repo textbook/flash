@@ -1,0 +1,10 @@
+---
+buildpack: https://github.com/cloudfoundry/python-buildpack#v1.5.4
+command: python3 scripts/launch.py
+disk_quota: 256M
+memory: 64M
+random-route: true
+applications:
+- name: gnome
+- name: ilk
+- name: flash

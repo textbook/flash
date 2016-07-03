@@ -19,12 +19,4 @@ deploy:
     password: $CF_PASSWORD
     organization: pivot-jsharpe
     space: flash
-    manifest: manifest-flash.yml
-  - provider: cloudfoundry
-    edge: true
-    api: https://api.run.pez.pivotal.io
-    username: $CF_USERNAME
-    password: $CF_PASSWORD
-    organization: pivot-jsharpe
-    space: flash
-    manifest: manifest-gnome.yml
+    manifest: manifest.yml
