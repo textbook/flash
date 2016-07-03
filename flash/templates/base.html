@@ -17,14 +17,14 @@
 <body>
 {% block body %}{% endblock %}
 <footer>
-  {% if not config.end_time %}
+  {% if not config.project_end %}
     <div class="spacer"></div>
   {% endif %}
   <div>
     <strong class="flash-project-name">{{ config.project_name }}</strong> is using
     <strong>flash</strong> - because it's a project dashboard <em>that works</em>
   </div>
-  {% if config.end_time %}
+  {% if config.project_end %}
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script>
       setInterval(function() {
