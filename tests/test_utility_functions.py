@@ -1,14 +1,15 @@
 from datetime import datetime
 from unittest import mock
 
-from flash.flash import CACHE, parse_config, update_service
+from flash.flash import CACHE, update_service
+from flash.parse import parse_config, path
 
 CONFIG_STRING = '{"name":"foo","services":[]}'
 
 
-@mock.patch('flash.flash.define_services')
-@mock.patch('flash.flash.getenv', return_value=CONFIG_STRING)
-@mock.patch('flash.flash.logger')
+@mock.patch('flash.parse.define_services')
+@mock.patch('flash.parse.getenv', return_value=CONFIG_STRING)
+@mock.patch('flash.parse.logger')
 def test_parse_config_from_env(logger, getenv, define_services):
     result = parse_config()
 
@@ -25,11 +26,12 @@ def test_parse_config_from_env(logger, getenv, define_services):
     define_services.assert_called_once_with([])
 
 
-@mock.patch('flash.flash.open', mock.mock_open(read_data=CONFIG_STRING))
-@mock.patch('flash.flash.define_services')
-@mock.patch('flash.flash.getenv', return_value=None)
-@mock.patch('flash.flash.logger')
-def test_parse_config_from_file(logger, getenv, define_services):
+@mock.patch('flash.parse.open', mock.mock_open(read_data=CONFIG_STRING))
+@mock.patch.object(path, 'join', return_value='some/file/path')
+@mock.patch('flash.parse.define_services')
+@mock.patch('flash.parse.getenv', return_value=None)
+@mock.patch('flash.parse.logger')
+def test_parse_config_from_file(logger, getenv, define_services, _):
     result = parse_config()
 
     assert result == {
@@ -39,11 +41,14 @@ def test_parse_config_from_file(logger, getenv, define_services):
         'style': 'default',
     }
     getenv.assert_called_once_with('FLASH_CONFIG')
-    logger.info.assert_called_once_with('loading configuration from file')
+    logger.info.assert_called_once_with(
+        'loading configuration from file: %r',
+        'some/file/path',
+    )
     define_services.assert_called_once_with([])
 
 
-@mock.patch('flash.flash.open', mock.mock_open(read_data="""
+@mock.patch('flash.parse.open', mock.mock_open(read_data="""
 {
   "project_name": "demo",
   "services": [
@@ -55,8 +60,8 @@ def test_parse_config_from_file(logger, getenv, define_services):
   ]
 }
 """))
-@mock.patch('flash.flash.define_services')
-@mock.patch('flash.flash.getenv', side_effect=dict(
+@mock.patch('flash.parse.define_services')
+@mock.patch('flash.parse.getenv', side_effect=dict(
     FLASH_CONFIG=None,
     TRACKER_API_TOKEN='password',
     TRACKER_PROJECT_ID='123',
@@ -69,8 +74,8 @@ def test_parse_config_env_vars(getenv, define_services):
     getenv.assert_has_calls(
         [
             mock.call('FLASH_CONFIG'),
-            mock.call('TRACKER_API_TOKEN', '$TRACKER_API_TOKEN'),
-            mock.call('TRACKER_PROJECT_ID', '$TRACKER_PROJECT_ID'),
+            mock.call('TRACKER_API_TOKEN'),
+            mock.call('TRACKER_PROJECT_ID'),
         ],
         any_order=True  # dictionary ordering
     )
