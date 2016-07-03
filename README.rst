@@ -40,6 +40,9 @@ The configuration, either saved in ``config.json`` at the project root or as the
       ]
     }
 
+If both the environment variable and the config file are provided, the
+environment variable takes precedence.
+
 If loading from ``config.json``, any value in the ``"services"`` settings that
 ``$LOOKS_LIKE_THIS`` (leading ``$``, capital letters and underscores only) will
 be assumed to be an environment variable and retrieved accordingly. This lets
@@ -47,7 +50,7 @@ you version control most of your configuration without leaking API tokens and
 other secrets.
 
 Settings
-========
+........
 
 * ``project_name`` - the project's name to display in the footer (defaults to
   ``"unnamed"``)
