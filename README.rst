@@ -56,6 +56,20 @@ Settings
 * ``style`` - the stylesheet to use (defaults to ``"default"``, which is
   currently the only option...)
 
+Running it
+----------
+
+If you just want to run Flash locally, you can use the included ``Dockerfile``
+to build and run a `Docker`_ container. This is a two-step process, after which
+Flash will be available at ``$(docker-machine ip):5000``::
+
+    docker build -t textbook/flash .
+    docker run -p 5000:5000 -d textbook/flash
+
+If your ``config.json`` includes environment variable references, or you want
+to override the configuration completely with ``$FLASH_CONFIG``, you can supply
+environment variables at ``docker run`` time with the ``-e`` command.
+
 Developing it
 -------------
 
@@ -83,8 +97,12 @@ Flash can easily be deployed to any `Cloud Foundry`_ environment. An example
 deployment with an app name and a random route. Once you have installed the CLI
 and selected an appropriate target org and space, you can simply ``cf push``.
 
+Alternatively, build a Docker container as above and deploy to an online
+container hosting service.
+
 .. _Cloud Foundry: https://cloudfoundry.org/
 .. _Codeship: https://codeship.com/
+.. _Docker: https://docs.docker.com/
 .. _Flask: http://flask.pocoo.org/
 .. _flash_services: https://github.com/textbook/flash_services
 .. _Jinja2: http://jinja.pocoo.org/docs/dev/
