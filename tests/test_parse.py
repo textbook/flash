@@ -7,7 +7,7 @@ import pytest
 from flash.parse import parse_config, _read_file
 
 
-CONFIG_STRING = '{"name":"foo","services":[]}'
+CONFIG_STRING = '{"name":"foo","services":[],"project_end":"20111213"}'
 
 
 @mock.patch('flash.parse.define_services')
@@ -18,6 +18,7 @@ def test_parse_config_from_env(logger, getenv, define_services):
 
     assert result == {
         'name': 'foo',
+        'project_end': "'20111213'",
         'project_name': 'unnamed',
         'services': define_services.return_value,
         'style': 'default',
@@ -39,6 +40,7 @@ def test_parse_config_from_file(logger, getenv, define_services, mock_read, _):
 
     assert result == {
         'name': 'foo',
+        'project_end': "'20111213'",
         'project_name': 'unnamed',
         'services': define_services.return_value,
         'style': 'default',

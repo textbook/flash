@@ -39,8 +39,8 @@ def parse_config():
     data['project_name'] = data.get('project_name', 'unnamed')
     data['services'] = define_services(data.get('services', []))
     data['style'] = data.get('style', 'default')
-    if data.get('end_time'):
-        data['end_time'] = repr(data['end_time'])
+    if data.get('project_end'):
+        data['project_end'] = repr(data['project_end'])
     return data
 
 

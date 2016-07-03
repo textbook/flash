@@ -55,8 +55,8 @@ Settings
   details and configuration options)
 * ``style`` - the stylesheet to use (defaults to ``"default"``, which is
   currently the only option...)
-* ``end_time`` - the end data and time of the project, in any format accepted by
-  `Moment.js`_. If provided, a countdown to this point will be shown in the
+* ``project_end`` - the end data and time of the project, in any format accepted
+  by `Moment.js`_. If provided, a countdown to this point will be shown in the
   footer (no default, if not provided no countdown is shown).
 
 Running it
