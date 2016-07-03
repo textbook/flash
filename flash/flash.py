@@ -32,7 +32,10 @@ def scratchpad():
     """Dummy page for styling tests."""
     return render_template(
         'demo.html',
-        config=dict(style=request.args.get('style', 'default')),
+        config=dict(
+            project_name='Scratchpad',
+            style=request.args.get('style', 'default'),
+        ),
         title='Style Scratchpad',
     )
 

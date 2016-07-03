@@ -56,8 +56,7 @@ def _parse_file():
     )
     logger.info('loading configuration from file: %r', file_name)
     try:
-        with open(file_name) as config_file:
-            data = json.load(config_file)
+        data = _read_file(file_name)
     except FileNotFoundError:
         logger.error('no configuration available, set FLASH_CONFIG or '
                      'provide config.json')
@@ -69,4 +68,22 @@ def _parse_file():
                 if env_val is None:
                     logger.warning('environment variable %r not found', val[1:])
                 service[key] = env_val or val
+    return data
+
+
+def _read_file(file_name):
+    """Read the file content and load it as JSON.
+
+    Arguments:
+      file_name (:py:class:`str`): The filename.
+
+    Returns:
+      :py:class:`dict`: The loaded JSON data.
+
+    Raises:
+      :py:class:`FileNotFoundError`: If the file is not found.
+
+    """
+    with open(file_name) as config_file:
+        data = json.load(config_file)
     return data
