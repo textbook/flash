@@ -2,9 +2,9 @@
   "project_name": "demo",
   "services": [
     {
-      "name": "tracker",
-      "api_token": "$TRACKER_API_TOKEN",
-      "project_id": "$TRACKER_PROJECT_ID"
+      "name": "travis",
+      "account": "textbook",
+      "app": "flash"
     }
   ]
 }

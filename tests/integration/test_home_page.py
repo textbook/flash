@@ -19,11 +19,11 @@ def test_home_page_accessible(selenium):
 
 @pytest.mark.usefixtures('live_server')
 @slow
-def test_home_page_contains_tracker_dashboard(selenium):
+def test_home_page_contains_travis_status(selenium):
     go_to_home_page(selenium)
     WebDriverWait(selenium, 5).until(
         expected_conditions.presence_of_element_located(
-            (By.CLASS_NAME, 'tracker-pane')
+            (By.CLASS_NAME, 'travis-pane')
         )
     )
 

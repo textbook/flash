@@ -68,11 +68,10 @@ The easiest way to install Flash for development is:
 3. To run it locally, edit ``flash/config.json`` or provide ``$FLASH_CONFIG``
    then run: ``python3 scripts/launch.py``
 
-4. To run the tests, use ``python setup.py test`` or run ``py.test``; the latter
-   allows you to add flags such as ``--runslow`` (to include the integration
-   tests) or ``--pytest-pylint`` (to lint the package before testing). For the
-   tests to run you must set the environment variables ``$TRACKER_API_TOKEN``
-   and ``$TRACKER_PROJECT_ID``.
+4. To run the tests, use ``python setup.py test`` or run ``py.test`` directly.
+   In the latter case, use ``--runslow --Firefox`` (or another browser of your
+   choice) to include the integration tests, and see `the docs`_ for
+   ``pytest-pylint`` configuration options.
 
 The templates are written using the `Jinja2`_ template language.
 
@@ -82,4 +81,5 @@ The templates are written using the `Jinja2`_ template language.
 .. _Jinja2: http://jinja.pocoo.org/docs/dev/
 .. _GitHub: https://github.com/
 .. _Pivotal Tracker: https://www.pivotaltracker.com/
+.. _the docs: https://pypi.python.org/pypi/pytest-pylint
 .. _Travis CI: https://travis-ci.org/
