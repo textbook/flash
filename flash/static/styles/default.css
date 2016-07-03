@@ -120,11 +120,11 @@ footer {
   50% {background: rgb(73, 31, 31);}
 }
 
-footer > div {
-  float: left;
+footer {
+  display: inline-flex;
+  justify-content: space-between;
 }
 
 #ending {
-  float: right;
   margin-right: 25px;
 }

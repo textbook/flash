@@ -17,6 +17,9 @@
 <body>
 {% block body %}{% endblock %}
 <footer>
+  {% if not config.end_time %}
+    <div class="spacer"></div>
+  {% endif %}
   <div>
     <strong class="flash-project-name">{{ config.project_name }}</strong> is using
     <strong>flash</strong> - because it's a project dashboard <em>that works</em>
@@ -29,6 +32,8 @@
       }, 1000);
     </script>
     <div id="ending">Project ends <span id="countdown"></span></div>
+  {% else %}
+    <div class="spacer"></div>
   {% endif %}
 </footer>
 </body>
