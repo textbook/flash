@@ -27,6 +27,7 @@ h1 {
 
 .service-tile.tile-error {
   border-left: 15px solid rgb(187, 52, 52);
+  -moz-animation: error-animation 5s infinite;
   -webkit-animation: error-animation 5s infinite;
 }
 
@@ -89,11 +90,13 @@ h1 {
 }
 
 .build-outcome:first-child.failed {
+  -moz-animation: failed-animation 3s infinite;
   -webkit-animation: failed-animation 3s infinite;
 }
 
 .build-outcome.working {
   background-color: rgb(52, 123, 52);
+  -moz-animation: working-animation 3s infinite;
   -webkit-animation: working-animation 3s infinite;
 }
 
