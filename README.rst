@@ -55,6 +55,9 @@ Settings
   details and configuration options)
 * ``style`` - the stylesheet to use (defaults to ``"default"``, which is
   currently the only option...)
+* ``end_time`` - the end time of the project, in any format accepted by
+  `Moment.js`_. If provided, a countdown to this will be shown in the footer.
+  (defaults to ``None``, in which case no countdown is shown.)
 
 Running it
 ----------
@@ -107,6 +110,7 @@ container hosting service.
 .. _flash_services: https://github.com/textbook/flash_services
 .. _Jinja2: http://jinja.pocoo.org/docs/dev/
 .. _GitHub: https://github.com/
+.. _Moment.js: http://momentjs.com/
 .. _Pivotal Tracker: https://www.pivotaltracker.com/
 .. _the docs: https://pypi.python.org/pypi/pytest-pylint
 .. _Travis CI: https://travis-ci.org/

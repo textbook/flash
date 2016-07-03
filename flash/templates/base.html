@@ -10,9 +10,6 @@
   <script src="{{ url_for('static', filename='scripts/utils.js') }}"></script>
   <script>
     $SERVICE_URL = {{ url_for('services') | tojson | safe }};
-    window.jQuery || document.write('<script src="{{
-        url_for('static', filename='scripts/jquery-2.2.2.min.js')
-    }}">\x3C/script>');
   </script>
   {% set stylesheet = 'styles/{}.css'.format(config.style) %}
   <link rel="stylesheet" href="{{ url_for('static', filename=stylesheet) }}">
@@ -20,8 +17,19 @@
 <body>
 {% block body %}{% endblock %}
 <footer>
-  <strong class="flash-project-name">{{ config.project_name }}</strong> is using
-  <strong>flash</strong> - because it's a project dashboard <em>that works</em>
+  <div>
+    <strong class="flash-project-name">{{ config.project_name }}</strong> is using
+    <strong>flash</strong> - because it's a project dashboard <em>that works</em>
+  </div>
+  {% if config.end_time %}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script>
+      setInterval(function() {
+        $('#countdown').text(moment({{ config.end_time | safe }}).fromNow());
+      }, 1000);
+    </script>
+    <div id="ending">Project ends <span id="countdown"></span></div>
+  {% endif %}
 </footer>
 </body>
 </html>

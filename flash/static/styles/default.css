@@ -119,3 +119,12 @@ footer {
 @-webkit-keyframes error-animation {
   50% {background: rgb(73, 31, 31);}
 }
+
+footer > div {
+  float: left;
+}
+
+#ending {
+  float: right;
+  margin-right: 25px;
+}
