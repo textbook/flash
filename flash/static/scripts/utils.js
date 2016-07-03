@@ -102,14 +102,14 @@ var bundleService = function (serviceSelector, interval) {
 */
 function bundleServices() {
   var serviceTiles = $('.service-tile');
-  var cssClassTotals = {}
+  var cssClassTotals = {};
 
   serviceTiles.each(function (index, obj) {
     $(obj).attr('class').match(/.*-tile/)[0].split(/\s+/).forEach(function (cssClass) {
-      if (cssClass === 'service-tile') return;
-      if (!cssClassTotals[cssClass]) cssClassTotals[cssClass] = 0;
+      if (cssClass === 'service-tile') { return }
+      if (!cssClassTotals[cssClass]) { cssClassTotals[cssClass] = 0 }
       cssClassTotals[cssClass] += 1;
-    })
+    });
   });
 
   for (var cssClass in cssClassTotals) {
