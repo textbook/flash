@@ -73,7 +73,13 @@ def test_parse_config_from_file(logger, getenv, define_services, mock_read, _):
     TRACKER_PROJECT_ID='123',
 ).get)
 def test_parse_config_env_vars(getenv, define_services):
-    _ = parse_config()
+    result = parse_config()
+
+    assert result == dict(
+        project_name='demo',
+        services=define_services.return_value,
+        style='default',
+    )
     define_services.assert_called_once_with([
         dict(name='tracker', api_token='password', project_id='123')
     ])
