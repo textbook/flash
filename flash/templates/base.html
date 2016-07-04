@@ -27,9 +27,8 @@
   {% if config.project_end %}
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script>
-      setInterval(function() {
-        $('#countdown').text(moment({{ config.project_end | safe }}).fromNow());
-      }, 1000);
+      var projectEnd = moment({{ config.project_end | safe }});
+      setInterval(function() { $('#countdown').text(projectEnd.fromNow()); }, 1000);
     </script>
     <div id="ending">Project ends <span id="countdown"></span></div>
   {% else %}
