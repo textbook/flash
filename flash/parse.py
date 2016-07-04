@@ -65,7 +65,7 @@ def _parse_file():
         exit()
     for service in data.get('services', []):
         for key, val in service.items():
-            if re.match(r'^\$[A-Z_]+$', val):
+            if isinstance(val, str) and re.match(r'^\$[A-Z_]+$', val):
                 env_val = getenv(val[1:])
                 if env_val is None:
                     logger.warning('environment variable %r not found', val[1:])
