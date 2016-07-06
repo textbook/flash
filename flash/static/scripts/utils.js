@@ -1,36 +1,36 @@
 /* globals $,$SERVICE_URL,SERVICES */
 
-var setTileHealth = function(tile, health) {
+function setTileHealth(tile, health) {
   tile.removeClass('tile-ok tile-error');
   if (health === 'ok') {
     tile.addClass('tile-ok');
   } else if (health === 'error') {
     tile.addClass('tile-error');
   }
-};
+}
 
-var updateCommit = function(element, data) {
+function updateCommit(element, data) {
   ['author', 'committed', 'message'].forEach(function (attr) {
     element.children('.' + attr).text(data[attr]);
   });
-};
+}
 
-var updateItems = function(pane, items, selector, updater) {
+function updateItems(pane, items, selector, updater) {
   var elements = pane.children(selector);
   items.slice(0, 4).forEach(function (item, index) {
     updater(elements.eq(index), item);
   });
-};
+}
 
-var updateOutcome = function(element, data) {
+function updateOutcome(element, data) {
   element.removeClass('passed failed crashed cancelled working');
   element.addClass(data.outcome);
   ['author', 'elapsed', 'message', 'outcome'].forEach(function (attr) {
     element.children('.' + attr).text(data[attr]);
   });
-};
+}
 
-var processPayload = function (payload) {
+function processPayload(payload) {
   for (var key in payload) {
     if (payload.hasOwnProperty(key)) {
       var data = payload[key];
@@ -46,26 +46,26 @@ var processPayload = function (payload) {
       }
     }
   }
-};
+}
 
-var updateServices = function() {
+function updateServices() {
   $.getJSON($SERVICE_URL, function (payload) {
     if (payload) {
       console.info('received', payload);
       processPayload(payload);
     }
   });
-};
+}
 
 /**
 * bundleService puts tiles of the same kind into a wrapper element and animates the transition.
 * bundleService as well as bundleServices could be nicely encapsulated in a jquery plugin.
 */
-var bundleService = function (serviceSelector, interval) {
+function bundleService(serviceSelector, interval) {
   console.log('bundle ', serviceSelector);
   var active = 0;
   var stacked = [];
-  var wrapper = bundle(serviceSelector);
+  var wrapper;
 
   function bundle(selector) {
     var tiles = $(selector).remove();
@@ -81,8 +81,10 @@ var bundleService = function (serviceSelector, interval) {
     return wrapper;
   }
 
+  wrapper = bundle(serviceSelector);
+
   function updateStacked() {
-    if (stacked.length === 0) return;
+    if (stacked.length === 0) { return; }
     var currentActive = active++ % stacked.length;
     wrapper.children().hide();
 
@@ -92,8 +94,8 @@ var bundleService = function (serviceSelector, interval) {
   }
 
   updateStacked();
-  setInterval(updateStacked, interval)
-};
+  setInterval(updateStacked, interval);
+}
 
 /**
 * bundleServices goes over all tiles and finds tiles of the same kind > 1
