@@ -106,6 +106,13 @@ and selected an appropriate target org and space, you can simply ``cf push``.
 Alternatively, build a Docker container as above and deploy to an online
 container hosting service.
 
+Thunder
+-------
+
+`Thunder`_ is a new branch in the Flash repository that might eventually replace
+the original. It switches the framework from Flask to `Tornado`_, allowing
+asynchronous processing and websockets.
+
 .. _Cloud Foundry: https://cloudfoundry.org/
 .. _Codeship: https://codeship.com/
 .. _Docker: https://docs.docker.com/
@@ -116,4 +123,6 @@ container hosting service.
 .. _Moment.js: http://momentjs.com/
 .. _Pivotal Tracker: https://www.pivotaltracker.com/
 .. _the docs: https://pypi.python.org/pypi/pytest-pylint
+.. _Thunder: https://github.com/textbook/flash/tree/thunder
+.. _Tornado: http://www.tornadoweb.org/en/stable/
 .. _Travis CI: https://travis-ci.org/
