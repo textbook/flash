@@ -31,6 +31,7 @@ function updateOutcome(element, data) {
 }
 
 function processPayload(payload) {
+  console.info('received', payload);
   for (var key in payload) {
     if (payload.hasOwnProperty(key)) {
       var data = payload[key];
@@ -51,7 +52,6 @@ function processPayload(payload) {
 function updateServices() {
   $.getJSON($SERVICE_URL, function (payload) {
     if (payload) {
-      console.info('received', payload);
       processPayload(payload);
     }
   });
@@ -127,5 +127,17 @@ function bundleServices() {
 $(document).ready(function () {
   bundleServices();
   updateServices();
-  setInterval(updateServices, 60000);
+  var ws = new WebSocket(
+    $SERVICE_URL
+      .replace('/_services', '/_services_ws')
+      .replace('http', 'ws')
+  );
+  ws.onmessage = function (evt) {
+    var payload = JSON.parse(evt.data);
+    if (payload) {
+      processPayload(payload);
+    }
+  };
+  var updateId = setInterval(function () { ws.send('update') }, 60000);
+  ws.onclose = function () { clearInterval(updateId); }
 });

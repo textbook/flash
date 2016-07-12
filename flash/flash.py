@@ -1,19 +1,23 @@
-"""The main Flask application."""
+"""The main application."""
 
-import logging
 from datetime import datetime, date, timedelta
+from json import dumps
+import logging
 from os import getenv
 
 from flash_services import blueprint
 from flask import Flask, jsonify, render_template, request
+from tornado.web import Application, FallbackHandler
+from tornado.websocket import WebSocketHandler
+from tornado.wsgi import WSGIContainer
 
 from .parse import parse_config
 
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__)
-app.secret_key = getenv('FLASK_SECRET_KEY', 'youwillneverguessit')
-app.register_blueprint(blueprint, url_prefix='/flash_services')
+flask_app = Flask(__name__)
+flask_app.secret_key = getenv('FLASK_SECRET_KEY', 'youwillneverguessit')
+flask_app.register_blueprint(blueprint, url_prefix='/flash_services')
 
 CACHE = {}
 
@@ -21,13 +25,13 @@ CACHE = {}
 CONFIG = parse_config()
 
 
-@app.route('/')
+@flask_app.route('/')
 def home():
     """Home page route."""
     return render_template('home.html', config=CONFIG, title='Flash')
 
 
-@app.route('/scratchpad')
+@flask_app.route('/scratchpad')
 def scratchpad():
     """Dummy page for styling tests."""
     return render_template(
@@ -40,13 +44,37 @@ def scratchpad():
     )
 
 
-@app.route('/_services')
+@flask_app.route('/_services')
 def services():
     """AJAX route for accessing services."""
     service_map = CONFIG['services']
     return jsonify(
         {name: update_service(name, service_map) for name in service_map}
     )
+
+
+class ServiceWebSocket(WebSocketHandler):
+    # pylint: disable=abstract-method
+
+    def open(self):
+        logger.info('WebSocket opened')
+
+    def on_message(self, message):
+        logger.debug('received message %r', message)
+        if message == 'update':
+            service_map = CONFIG['services']
+            self.write_message(dumps({
+                name: update_service(name, service_map) for name in service_map
+            }))
+
+    def on_close(self):
+        logger.info('WebSocket closed')
+
+
+app = Application([
+    (r'/_services_ws', ServiceWebSocket),
+    (r".*", FallbackHandler, dict(fallback=WSGIContainer(flask_app))),
+])
 
 
 def update_service(name, service_map):

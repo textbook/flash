@@ -1,10 +1,11 @@
 import pytest
 
-import flash
+from flash import flash
+
 
 @pytest.fixture
 def app():
-    return flash.app
+    return flash.flask_app
 
 
 def pytest_addoption(parser):

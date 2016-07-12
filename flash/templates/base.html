@@ -9,7 +9,7 @@
   <script src="{{ url_for('services.static', filename='scripts/services.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/utils.js') }}"></script>
   <script>
-    $SERVICE_URL = {{ url_for('services') | tojson | safe }};
+    $SERVICE_URL = {{ url_for('services', _external=True) | tojson | safe }};
   </script>
   {% set stylesheet = 'styles/{}.css'.format(config.style) %}
   <link rel="stylesheet" href="{{ url_for('static', filename=stylesheet) }}">
