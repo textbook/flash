@@ -4,7 +4,7 @@
     {% for service_id, service in config.services.items() %}
       <div id="{{ service_id }}" class="service-tile {{ service.service_name }}-tile">
         <div class="service-caption">
-          <div class="service-name">{{ service.FRIENDLY_NAME }}</div>
+          <div class="service-name">{{ service.FRIENDLY_NAME or service.__class__.__name__ }}</div>
           <div class="project-name"></div>
         </div>
         {% set template = 'partials/{}.html'.format(service.TEMPLATE) %}
