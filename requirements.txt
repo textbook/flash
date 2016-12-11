@@ -2,7 +2,7 @@ astroid==1.4.6
 click==6.6
 colorama==0.3.7
 cookies==2.2.1
-flash-services==0.3.6
+flash-services==0.4.1
 Flask==0.11.1
 Flask-Humanize==0.3.0
 humanize==0.5.1
