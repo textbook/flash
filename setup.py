@@ -45,7 +45,7 @@ class PyTest(TestCommand):
             '--pylint',
             '--pylint-error-types=FEW',
             '--runslow',
-            '--driver=Firefox',
+            '--driver=Chrome',
         ]
         self.test_suite = True
 

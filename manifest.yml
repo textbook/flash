@@ -6,5 +6,4 @@ memory: 64M
 random-route: true
 applications:
 - name: gnome
-- name: ilk
 - name: flash

@@ -12,8 +12,8 @@ Flash
 .. image:: https://www.quantifiedcode.com/api/v1/project/3b65c038488c41d3a1a12f3bc9bb1bd8/badge.svg
   :target: https://www.quantifiedcode.com/app/project/3b65c038488c41d3a1a12f3bc9bb1bd8
   :alt: Code Issues
-  
-.. image:: https://api.codacy.com/project/badge/grade/cef9c42119be41fc99ff7e89ffdd8cd6    
+
+.. image:: https://api.codacy.com/project/badge/grade/cef9c42119be41fc99ff7e89ffdd8cd6
   :target: https://www.codacy.com/app/j-r-sharpe-github/flash
   :alt: Other Code Issues
 
@@ -89,9 +89,11 @@ The easiest way to install Flash for development is:
    then run: ``python3 scripts/launch.py``
 
 4. To run the tests, use ``python setup.py test`` or run ``py.test`` directly.
-   In the latter case, use ``--runslow --Firefox`` (or another browser of your
+   In the latter case, use ``--runslow --Chrome`` (or another browser of your
    choice) to include the integration tests, and see `the docs`_ for
-   ``pytest-pylint`` configuration options.
+   ``pytest-pylint`` configuration options. For the integration tests you
+   will need to ensure that ``chromedriver`` is on your PATH; on OS X, you can
+    simply ``brew install chromedriver``.
 
 The templates are written using the `Jinja2`_ template language.
 
