@@ -4,6 +4,11 @@ addons:
 language: python
 python:
 - '3.5'
+before_install:
+- wget https://chromedriver.storage.googleapis.com/2.33/chromedriver_linux64.zip
+- unzip chromedriver_linux64.zip
+- sudo mv chromedriver /usr/local/bin
+- sudo chmod a+x /usr/local/bin/chromedriver
 install:
 - pip install -r requirements.txt
 - pip install coveralls
