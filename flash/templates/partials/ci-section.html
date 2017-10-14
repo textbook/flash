@@ -1,10 +1,6 @@
 <section class="pane {{ service.service_name }}-pane">
   {% for i in range(4) %}
-    {% if service_data['builds'] | length > i %}
-      {% set build_data = service_data['builds'][i] %}
-    {% else %}
-      {% set build_data = {} %}
-    {% endif %}
+    {% set build_data = service_data['builds'][i] or {} %}
     <div class="pane-item build-outcome {{ build_data.outcome }}">
       <div class="message">{{ build_data.message }}</div>
       <div class="elapsed">{{ build_data.elapsed }}</div>

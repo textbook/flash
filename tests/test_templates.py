@@ -47,7 +47,7 @@ def test_ci_section_with_builds(jinja):
 
 
 def test_vcs_section_without_commits(jinja):
-    context = _create_context('fake-service', {'builds': []})
+    context = _create_context('fake-service', {'commits': []})
 
     soup = _render(jinja, 'partials/vcs-section.html', context)
 
@@ -62,7 +62,7 @@ def test_vcs_section_with_commits(jinja):
         _commit('three', 'three days ago', 'Chris'),
         _commit('four', 'four days ago', 'Dipak'),
     ]
-    context = _create_context('fake-service', {'builds': commits})
+    context = _create_context('fake-service', {'commits': commits})
 
     soup = _render(jinja, 'partials/vcs-section.html', context)
 

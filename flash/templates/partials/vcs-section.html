@@ -1,10 +1,6 @@
 <section class="pane {{ service.service_name }}-pane">
   {% for i in range(4) %}
-    {% if service_data['builds'] | length > i %}
-      {% set commit_data = service_data['builds'][i] %}
-    {% else %}
-      {% set commit_data = {} %}
-    {% endif %}
+    {% set commit_data = service_data['commits'][i] or {} %}
     <div class="pane-item commit">
       <div class="message">{{ commit_data.message }}</div>
       <div class="committed">{{ commit_data.committed }}</div>
