@@ -24,7 +24,12 @@ CONFIG = parse_config()
 @app.route('/')
 def home():
     """Home page route."""
-    return render_template('home.html', config=CONFIG, title='Flash')
+    return render_template(
+        'home.html',
+        config=CONFIG,
+        data=_get_data(),
+        title='Flash',
+    )
 
 
 @app.route('/scratchpad')
@@ -43,10 +48,12 @@ def scratchpad():
 @app.route('/_services')
 def services():
     """AJAX route for accessing services."""
+    return jsonify(_get_data())
+
+
+def _get_data():
     service_map = CONFIG['services']
-    return jsonify(
-        {name: update_service(name, service_map) for name in service_map}
-    )
+    return {name: update_service(name, service_map) for name in service_map}
 
 
 def update_service(name, service_map):

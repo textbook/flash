@@ -2,10 +2,14 @@
 {% block body %}<main>
   <div class="dashboard">
     {% for service_id, service in config.services.items() %}
-      <div id="{{ service_id }}" class="service-tile {{ service.service_name }}-tile">
+      {% set service_data = data[service_id] %}
+      <div id="{{ service_id }}"
+           class="service-tile {{ service.service_name }}-tile
+            {% if service_data.health == 'ok' %}tile-ok{% endif %}
+            {% if service_data.health == 'error' %}tile-error{% endif %}">
         <div class="service-caption">
           <div class="service-name">{{ service.FRIENDLY_NAME or service.__class__.__name__ }}</div>
-          <div class="project-name"></div>
+          <div class="project-name">{{ service_data.name }}</div>
         </div>
         {% set template = 'partials/{}.html'.format(service.TEMPLATE) %}
         {% include template %}

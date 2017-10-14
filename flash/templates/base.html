@@ -3,14 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Flask + Dashboard = Flash</title>
-  <script
-      src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
   <script src="{{ url_for('services.static', filename='scripts/services.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/utils.js') }}"></script>
   <script>
     $SERVICE_URL = {{ url_for('services') | tojson | safe }};
   </script>
+  <noscript>
+    <meta http-equiv="refresh" content="60">
+  </noscript>
   {% set stylesheet = 'styles/{}.css'.format(config.style) %}
   <link rel="stylesheet" href="{{ url_for('static', filename=stylesheet) }}">
 </head>

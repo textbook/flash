@@ -74,6 +74,7 @@ setup(
     packages=[PKG_NAME],
     platforms='any',
     tests_require=[
+        'beautifulsoup4',
         'pylint',
         'pytest',
         'pytest-flask',

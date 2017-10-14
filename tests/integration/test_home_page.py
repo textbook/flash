@@ -42,5 +42,13 @@ def test_home_page_contains_countdown(selenium):
     assert countdown.startswith('project ends')
 
 
+@pytest.mark.usefixtures('live_server')
+@slow
+def test_home_page_data_prefilled(selenium):
+    go_to_home_page(selenium)
+    elements = selenium.find_elements(By.CLASS_NAME, 'message')
+    assert [element.text for element in elements] != ['', '', '', '']
+
+
 def go_to_home_page(selenium):
     selenium.get(url_for('home', _external=True))

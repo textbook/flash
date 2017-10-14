@@ -126,6 +126,5 @@ function bundleServices() {
 
 $(document).ready(function () {
   bundleServices();
-  updateServices();
   setInterval(updateServices, 60000);
 });

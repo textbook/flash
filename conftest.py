@@ -1,3 +1,5 @@
+import jinja2
+import os
 import pytest
 
 import flash
@@ -16,3 +18,10 @@ def chrome_options(chrome_options):
 
 def pytest_addoption(parser):
     parser.addoption('--runslow', action='store_true', help='run slow tests')
+
+
+@pytest.fixture
+def jinja():
+    here = os.path.dirname(__file__)
+    template_path = '{}/flash/templates'.format(here)
+    return jinja2.Environment(loader=jinja2.FileSystemLoader(template_path))

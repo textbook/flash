@@ -1,9 +1,14 @@
 <section class="pane {{ service.service_name }}-pane">
-  {% for _ in range(4) %}
-    <div class="pane-item build-outcome">
-      <div class="message"></div>
-      <div class="elapsed"></div>
-      <div class="author"></div>
+  {% for i in range(4) %}
+    {% if service_data['builds'] | length > i %}
+      {% set build_data = service_data['builds'][i] %}
+    {% else %}
+      {% set build_data = {} %}
+    {% endif %}
+    <div class="pane-item build-outcome {{ build_data.outcome }}">
+      <div class="message">{{ build_data.message }}</div>
+      <div class="elapsed">{{ build_data.elapsed }}</div>
+      <div class="author">{{ build_data.author }}</div>
     </div>
   {% endfor %}
 </section>
