@@ -28,6 +28,7 @@ pytest-selenium==1.11.1
 pytest-variables==1.7.0
 python-dateutil==2.5.3
 requests==2.18.4
+requests-cache==0.4.13
 responses==0.5.1
 selenium==3.6.0
 six==1.11.0

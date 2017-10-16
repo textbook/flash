@@ -105,3 +105,6 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# requests cache
+cache.sqlite
