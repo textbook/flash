@@ -4,11 +4,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
-from tests.helpers import slow, Or
+from tests.helpers import Or
 
 
 @pytest.mark.usefixtures('live_server')
-@slow
+@pytest.mark.slow
 def test_home_page_accessible(selenium):
     go_to_home_page(selenium)
     WebDriverWait(selenium, 5).until(expected_conditions.title_is(
@@ -18,7 +18,7 @@ def test_home_page_accessible(selenium):
 
 
 @pytest.mark.usefixtures('live_server')
-@slow
+@pytest.mark.slow
 def test_home_page_contains_travis_status(selenium):
     go_to_home_page(selenium)
     WebDriverWait(selenium, 5).until(
@@ -29,7 +29,7 @@ def test_home_page_contains_travis_status(selenium):
 
 
 @pytest.mark.usefixtures('live_server')
-@slow
+@pytest.mark.slow
 def test_home_page_contains_countdown(selenium):
     go_to_home_page(selenium)
     spec = By.ID, 'ending'
@@ -43,7 +43,7 @@ def test_home_page_contains_countdown(selenium):
 
 
 @pytest.mark.usefixtures('live_server')
-@slow
+@pytest.mark.slow
 def test_home_page_data_prefilled(selenium):
     go_to_home_page(selenium)
     elements = selenium.find_elements(By.CLASS_NAME, 'message')
