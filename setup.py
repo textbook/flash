@@ -62,7 +62,7 @@ setup(
         'Intended Audience :: Developers',
         'Natural Language :: English',
         'Operating System :: OS Independent',
-        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3 :: Only',
     ],
     cmdclass={'test': PyTest},

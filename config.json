@@ -1,11 +1,16 @@
 {
-  "project_end": "20101112 13:14:15",
-  "project_name": "demo",
+  "project_name": "Flash",
   "services": [
     {
       "name": "travis",
       "account": "textbook",
       "app": "flash"
+    },
+    {
+      "name": "coveralls",
+      "vcs_name": "github",
+      "account": "textbook",
+      "repo": "flash"
     }
   ]
 }
