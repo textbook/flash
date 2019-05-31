@@ -1,22 +1,31 @@
 dist: xenial
 addons:
-  chrome: stable
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
 services:
-- xvfb
+  - xvfb
+
 language: python
 python:
 - '3.7'
+
 before_install:
 - wget https://chromedriver.storage.googleapis.com/2.33/chromedriver_linux64.zip
 - unzip chromedriver_linux64.zip
 - sudo mv chromedriver /usr/local/bin
 - sudo chmod a+x /usr/local/bin/chromedriver
+
 install:
 - pip install -r requirements.txt
 - pip install coveralls
-script:
-- coverage run --source=flash setup.py test
+
+script: coverage run --source=flash setup.py test
+
 after_success: coveralls
+
 deploy:
   - provider: cloudfoundry
     edge: true
