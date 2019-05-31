@@ -19,8 +19,29 @@ Flash
 
 `Flask`_ + Dashboard = Flash. A project dashboard *that works*.
 
-Configuration
--------------
+
+Deploying it
+------------
+
+1. **Heroku**
+
+   |Deploy to Heroku|_
+
+2. **Cloud Foundry**
+
+   Flash can easily be deployed to any `Cloud Foundry`_ environment. An
+   example ``manifest.yml`` is included with the project, showing how to
+   configure the deployment with an app name and a random route. Once you
+   have installed the CLI and selected an appropriate target org and space,
+   you can simply ``cf push``.
+
+3. **Docker**
+
+   Alternatively, build a Docker container as above and deploy to an online
+   container hosting service.
+
+Configuring it
+--------------
 
 The configuration, either saved in ``config.json`` at the project root or as the
 ``$FLASH_CONFIG`` environment variable, should look like::
@@ -93,17 +114,6 @@ The easiest way to install Flash for development is:
 
 The templates are written using the `Jinja2`_ template language.
 
-Deploying it
-------------
-
-Flash can easily be deployed to any `Cloud Foundry`_ environment. An example
-``manifest.yml`` is included with the project, showing how to configure the
-deployment with an app name and a random route. Once you have installed the CLI
-and selected an appropriate target org and space, you can simply ``cf push``.
-
-Alternatively, build a Docker container as above and deploy to an online
-container hosting service.
-
 Thunder
 -------
 
@@ -118,6 +128,8 @@ asynchronous processing and websockets.
 .. _flash_services: https://github.com/textbook/flash_services
 .. _Jinja2: http://jinja.pocoo.org/docs/dev/
 .. _GitHub: https://github.com/
+.. |Deploy to Heroku| image:: https://www.herokucdn.com/deploy/button.svg
+.. _Deploy to Heroku: https://heroku.com/deploy
 .. _Moment.js: http://momentjs.com/
 .. _Pivotal Tracker: https://www.pivotaltracker.com/
 .. _the docs: https://pypi.python.org/pypi/pytest-pylint

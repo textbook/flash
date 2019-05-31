@@ -3,7 +3,6 @@ applications:
   - name: flash
     buildpacks:
      - python_buildpack
-    command: python3 launch.py
     disk_quota: 256M
     memory: 64M
     random-route: true

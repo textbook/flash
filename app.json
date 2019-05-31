@@ -1,0 +1,12 @@
+{
+  "name": "Flash",
+  "description": "A project dashboard that works.",
+  "repository": "https://github.com/textbook/flash",
+  "keywords": ["python", "flask", "dashboard"],
+  "env": {
+    "FLASH_CONFIG": {
+      "description": "Set this to a JSON string to override the config.json file.",
+      "required": false
+    }
+  }
+}
