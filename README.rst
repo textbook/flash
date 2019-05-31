@@ -37,7 +37,7 @@ Deploying it
 
 3. **Docker**
 
-   Alternatively, build a Docker container as above and deploy to an online
+   Alternatively, build a Docker container as below and deploy to an online
    container hosting service.
 
 Configuring it
