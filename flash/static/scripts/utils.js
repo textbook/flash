@@ -37,6 +37,9 @@ function processPayload(payload) {
       var tile = $('#' + key);
       var pane = tile.children('.pane').first();
       var serviceHandler = SERVICES[data.service_name];
+      if (!serviceHandler) {
+        console.warn('Missing service: ' + data.service_name);
+      }
 
       setTileHealth(tile, data.health || 'neutral');
       tile.find('.service-caption > .project-name').first().text(data.name);
