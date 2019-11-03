@@ -13,7 +13,7 @@ python:
 - '3.7'
 
 before_install:
-- wget https://chromedriver.storage.googleapis.com/74.0.3729.6/chromedriver_linux64.zip
+- wget "https://chromedriver.storage.googleapis.com/$(curl https://chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip"
 - unzip chromedriver_linux64.zip
 - sudo mv chromedriver /usr/local/bin
 - sudo chmod a+x /usr/local/bin/chromedriver
