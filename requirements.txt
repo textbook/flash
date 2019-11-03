@@ -7,7 +7,7 @@ chardet==3.0.4
 Click==7.0
 colorama==0.4.1
 cookies==2.2.1
-flash-services==0.8.0
+flash-services==0.9.1
 Flask==1.0.3
 Flask-Humanize==0.3.0
 humanize==0.5.1
