@@ -3,7 +3,8 @@ dist: bionic
 addons:
   apt:
     sources:
-      - sourceline: 'google-chrome'
+      - sourceline: 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main'
+        key_url: 'https://dl.google.com/linux/linux_signing_key.pub'
     packages:
       - google-chrome-stable
 services:
