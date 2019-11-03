@@ -43,6 +43,13 @@ Deploying it
 Configuring it
 --------------
 
+There are three environment variables that Flash is aware of:
+
+* ``PORT`` - the port to bind to (defaults to 5000)
+* ``FLASK_SECRET_KEY`` - the secret key for `Flask sessions`_ (they aren't
+  currently used, but it's good practice to set it to a random value)
+* ``FLASH_CONFIG`` - the configuration, described below
+
 The configuration, either saved in ``config.json`` at the project root or as the
 ``$FLASH_CONFIG`` environment variable, should look like::
 
@@ -125,6 +132,7 @@ asynchronous processing and websockets.
 .. _Codeship: https://codeship.com/
 .. _Docker: https://docs.docker.com/
 .. _Flask: http://flask.pocoo.org/
+.. _Flask sessions: https://flask.palletsprojects.com/en/master/quickstart/#sessions
 .. _flash_services: https://github.com/textbook/flash_services
 .. _Jinja2: http://jinja.pocoo.org/docs/dev/
 .. _GitHub: https://github.com/

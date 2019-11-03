@@ -6,3 +6,5 @@ applications:
     disk_quota: 256M
     memory: 64M
     random-route: true
+    env:
+      FLASK_SECRET_KEY: pleasechangeme

@@ -7,6 +7,10 @@
     "FLASH_CONFIG": {
       "description": "Set this to a JSON string to override the config.json file.",
       "required": false
+    },
+    "FLASK_SECRET_KEY": {
+      "description": "Secret key base for Flask app",
+      "generator": "secret"
     }
   }
 }
