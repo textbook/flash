@@ -2,7 +2,8 @@
 applications:
   - name: flash
     buildpacks:
-     - https://github.com/cloudfoundry/python-buildpack.git#v1.6.37
+     - https://github.com/cloudfoundry/python-buildpack.git#v1.7.0
+    stack: cflinuxfs3
     disk_quota: 256M
     memory: 64M
     random-route: true
