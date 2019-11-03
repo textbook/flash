@@ -23,7 +23,9 @@ install:
 - pip install -r requirements.txt
 - pip install coveralls
 
-script: coverage run --source=flash setup.py test
+script:
+- coverage run --source=flash setup.py test
+- docker build . -t textbook/flash
 
 after_success: coveralls
 

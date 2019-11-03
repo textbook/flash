@@ -9,19 +9,18 @@ RUN update-ca-certificates
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-COPY ./requirements.txt /usr/src/app
-RUN pip install --no-cache-dir -r requirements.txt
+COPY ./requirements.txt .
+COPY setup.py .
+COPY README.rst .
+COPY /flash ./flash
 
-COPY setup.py /usr/src/app
-COPY README.rst /usr/src/app
-COPY /flash /usr/src/app/flash
+RUN python setup.py install
 
-RUN python3 setup.py develop
+COPY launch.py .
+COPY config.json .
 
-COPY /scripts /usr/src/app/scripts
-COPY config.json /usr/src/app
-
+ENV PORT=5000
 EXPOSE 5000
 
 ENTRYPOINT [ "python3" ]
-CMD [ "./scripts/launch.py" ]
+CMD [ "./launch.py" ]
