@@ -3,7 +3,7 @@ dist: bionic
 addons:
   apt:
     sources:
-      - google-chrome
+      - sourceline: 'google-chrome'
     packages:
       - google-chrome-stable
 services:
