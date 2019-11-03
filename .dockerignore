@@ -1,0 +1,6 @@
+.cache/
+.eggs/
+.pytest_cache/
+flash.egg-info/
+tests/
+cache.sqlite
