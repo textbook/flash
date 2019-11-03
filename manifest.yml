@@ -2,7 +2,7 @@
 applications:
   - name: flash
     buildpacks:
-     - python_buildpack
+     - https://github.com/cloudfoundry/python-buildpack.git#v1.6.37
     disk_quota: 256M
     memory: 64M
     random-route: true
