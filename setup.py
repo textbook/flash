@@ -67,7 +67,7 @@ setup(
     ],
     cmdclass={'test': PyTest},
     description=description,
-    install_requires=['flash_services', 'Flask'],
+    install_requires=['flash_services', 'Flask', 'requests-cache'],
     license='License :: OSI Approved :: ISC License (ISCL)',
     long_description=long_description,
     name=PKG_NAME,
