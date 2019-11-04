@@ -91,10 +91,10 @@ Running it
 
 If you just want to run Flash locally, you can use the included ``Dockerfile``
 to build and run a `Docker`_ container. This is a two-step process, after which
-Flash will be available at ``$(docker-machine ip):5000``::
+Flash will be available at ``http://localhost:5000``::
 
     docker build -t textbook/flash .
-    docker run -p 5000:5000 -d textbook/flash
+    docker run -p 5000:80 textbook/flash
 
 If your ``config.json`` includes environment variable references, or you want
 to override the configuration completely with ``$FLASH_CONFIG``, you can supply

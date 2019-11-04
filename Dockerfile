@@ -19,8 +19,8 @@ RUN python setup.py install
 COPY launch.py .
 COPY config.json .
 
-ENV PORT=5000
-EXPOSE 5000
+ENV PORT=80
+EXPOSE 80
 
 ENTRYPOINT [ "python3" ]
 CMD [ "./launch.py" ]
