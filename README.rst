@@ -117,7 +117,7 @@ The easiest way to install Flash for development is:
    choice) to include the integration tests, and see `the docs`_ for
    ``pytest-pylint`` configuration options. For the integration tests you
    will need to ensure that ``chromedriver`` is on your PATH; on OS X, you can
-   simply ``brew install chromedriver``.
+   simply ``brew cask install chromedriver``.
 
 The templates are written using the `Jinja2`_ template language.
 
