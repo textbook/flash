@@ -1,8 +1,8 @@
 Flash
 =====
 
-.. image:: https://travis-ci.org/textbook/flash.svg?branch=master
-  :target: https://travis-ci.org/textbook/flash
+.. image:: https://travis-ci.com/textbook/flash.svg?branch=master
+  :target: https://travis-ci.com/textbook/flash
   :alt: Travis Build Status
 
 .. image:: https://coveralls.io/repos/github/textbook/flash/badge.svg?branch=master
