@@ -1,6 +1,6 @@
-FROM python:3.7.4-alpine
+FROM python:3.7.9-alpine
 
-MAINTAINER Jonathan Sharpe <mail@jonrshar.pe>
+LABEL maintainer="Jonathan Sharpe <mail@jonrshar.pe>"
 
 RUN apk update
 RUN apk add ca-certificates
