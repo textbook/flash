@@ -1,12 +1,14 @@
 import jinja2
+import multiprocessing
 import os
 import pytest
 
 import flash
 
 
-@pytest.fixture
+@pytest.fixture(scope='session')
 def app():
+    multiprocessing.set_start_method('fork')
     return flash.app
 
 
