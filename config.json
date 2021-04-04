@@ -3,11 +3,6 @@
   "project_name": "Flash",
   "services": [
     {
-      "name": "travis",
-      "account": "textbook",
-      "app": "flash"
-    },
-    {
       "name": "coveralls",
       "vcs_name": "github",
       "account": "textbook",

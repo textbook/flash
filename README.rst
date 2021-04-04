@@ -1,9 +1,9 @@
 Flash
 =====
 
-.. image:: https://travis-ci.com/textbook/flash.svg?branch=master
-  :target: https://travis-ci.com/textbook/flash
-  :alt: Travis Build Status
+.. image:: https://github.com/textbook/flash/actions/workflows/push.yml/badge.svg
+  :target: https://github.com/textbook/flash/actions/workflows/push.yml
+  :alt: GitHub Actions Build Status
 
 .. image:: https://coveralls.io/repos/github/textbook/flash/badge.svg?branch=master
   :target: https://coveralls.io/github/textbook/flash?branch=master
