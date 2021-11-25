@@ -4,8 +4,8 @@ applications:
     buildpacks:
      - https://github.com/cloudfoundry/python-buildpack.git#v1.7.47
     stack: cflinuxfs3
-    disk_quota: 256M
-    memory: 64M
+    disk_quota: 512M
+    memory: 128M
     random-route: true
     env:
       FLASK_SECRET_KEY: pleasechangeme
