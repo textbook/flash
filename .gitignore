@@ -107,4 +107,4 @@ docs/_build/
 target/
 
 # requests cache
-cache.sqlite
+*cache.sqlite

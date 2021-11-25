@@ -1,4 +1,4 @@
-FROM python:3.9.2-alpine
+FROM python:3.10.0-alpine
 
 LABEL maintainer="Jonathan Sharpe <mail@jonrshar.pe>"
 

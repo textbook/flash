@@ -86,6 +86,6 @@ def _read_file(file_name):
       :py:class:`FileNotFoundError`: If the file is not found.
 
     """
-    with open(file_name) as config_file:
+    with open(file_name, encoding="utf8") as config_file:
         data = json.load(config_file)
     return data
