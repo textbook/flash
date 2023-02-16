@@ -52,6 +52,6 @@ trio==0.19.0
 trio-websocket==0.9.2
 url-normalize==1.4.3
 urllib3==1.26.7
-Werkzeug==2.0.2
+Werkzeug==2.2.3
 wrapt==1.13.3
 wsproto==1.0.0
