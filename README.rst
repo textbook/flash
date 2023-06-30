@@ -5,8 +5,8 @@ Flash
   :target: https://github.com/textbook/flash/actions/workflows/push.yml
   :alt: GitHub Actions Build Status
 
-.. image:: https://coveralls.io/repos/github/textbook/flash/badge.svg?branch=master
-  :target: https://coveralls.io/github/textbook/flash?branch=master
+.. image:: https://coveralls.io/repos/github/textbook/flash/badge.svg?branch=main
+  :target: https://coveralls.io/github/textbook/flash?branch=main
   :alt: Test Coverage
 
 .. image:: https://api.codacy.com/project/badge/grade/cef9c42119be41fc99ff7e89ffdd8cd6
@@ -14,7 +14,7 @@ Flash
   :alt: Other Code Issues
 
 .. image:: https://img.shields.io/badge/license-ISC-blue.svg
-  :target: https://github.com/textbook/flash/blob/master/LICENSE
+  :target: https://github.com/textbook/flash/blob/main/LICENSE
   :alt: ISC License
 
 `Flask`_ + Dashboard = Flash. A project dashboard *that works*.
@@ -132,7 +132,7 @@ asynchronous processing and websockets.
 .. _Codeship: https://codeship.com/
 .. _Docker: https://docs.docker.com/
 .. _Flask: http://flask.pocoo.org/
-.. _Flask sessions: https://flask.palletsprojects.com/en/master/quickstart/#sessions
+.. _Flask sessions: https://flask.palletsprojects.com/en/2.3.x/quickstart/#sessions
 .. _flash_services: https://github.com/textbook/flash_services
 .. _Jinja2: http://jinja.pocoo.org/docs/dev/
 .. _GitHub: https://github.com/
