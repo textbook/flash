@@ -16,7 +16,7 @@ jobs:
           python-version: '3.9'
           cache: 'pip'
       - uses: docker/setup-buildx-action@v2
-      - run: pip install -r requirements.txt
+      - run: pip install -r requirements.dev.txt
       - run: pip install coveralls
       - run: coverage run --source=flash setup.py test
       - run: docker build . -t textbook/flash
