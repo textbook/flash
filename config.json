@@ -1,20 +1,7 @@
 {
+  "project_end": "20190531 11:00:00",
   "project_name": "Flash",
   "services": [
-    {
-      "name": "github",
-      "username": "$GITHUB_USERNAME",
-      "password": "$GITHUB_TOKEN",
-      "account": "textbook",
-      "repo": "flash"
-    },
-    {
-      "name": "gh_actions",
-      "username": "$GITHUB_USERNAME",
-      "password": "$GITHUB_TOKEN",
-      "account": "textbook",
-      "repo": "flash"
-    },
     {
       "name": "coveralls",
       "vcs_name": "github",
