@@ -4,9 +4,9 @@
   "repository": "https://github.com/textbook/flash",
   "keywords": ["python", "flask", "dashboard"],
   "buildpacks": {
-    "url": "https://github.com/heroku/heroku-buildpack-python.git#v182"
+    "url": "https://github.com/heroku/heroku-buildpack-python.git#v233"
   },
-  "stack": "heroku-18",
+  "stack": "heroku-22",
   "env": {
     "FLASH_CONFIG": {
       "description": "Set this to a JSON string to override the config.json file.",
