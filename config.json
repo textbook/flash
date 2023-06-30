@@ -9,13 +9,6 @@
       "repo": "flash"
     },
     {
-      "name": "github",
-      "username": "$GITHUB_USERNAME",
-      "password": "$GITHUB_TOKEN",
-      "account": "textbook",
-      "repo": "flash_services"
-    },
-    {
       "name": "gh_actions",
       "username": "$GITHUB_USERNAME",
       "password": "$GITHUB_TOKEN",
@@ -23,23 +16,10 @@
       "repo": "flash"
     },
     {
-      "name": "gh_actions",
-      "username": "$GITHUB_USERNAME",
-      "password": "$GITHUB_TOKEN",
-      "account": "textbook",
-      "repo": "flash_services"
-    },
-    {
       "name": "coveralls",
       "vcs_name": "github",
       "account": "textbook",
       "repo": "flash"
-    },
-    {
-      "name": "coveralls",
-      "vcs_name": "github",
-      "account": "textbook",
-      "repo": "flash_services"
     }
   ]
 }
